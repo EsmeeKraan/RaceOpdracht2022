@@ -1,0 +1,15 @@
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.exe
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.deps.json
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.runtimeconfig.json
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.dll
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.pdb
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.csproj.AssemblyReference.cache
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.AssemblyInfoInputs.cache
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.AssemblyInfo.cs
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.csproj.CoreCompileInputs.cache
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.dll
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\refint\RaceOpdrachtHuiswerk.dll
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.pdb
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.genruntimeconfig.cache
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\ref\RaceOpdrachtHuiswerk.dll
