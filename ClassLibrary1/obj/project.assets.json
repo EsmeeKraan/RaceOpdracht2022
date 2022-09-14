@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\ClassLibrary1.csproj",
-      "projectName": "ClassLibrary1",
-      "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\ClassLibrary1.csproj",
+      "projectUniqueName": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj",
+      "projectName": "Model",
+      "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj",
       "packagesPath": "C:\\Users\\esmee\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\obj\\",
       "projectStyle": "PackageReference",

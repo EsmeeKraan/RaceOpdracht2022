@@ -2,14 +2,27 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "ClassLibrary1/1.0.0": {
+      "Controller/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Controller.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Controller.dll": {}
+        }
+      },
+      "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
-          "bin/placeholder/ClassLibrary1.dll": {}
+          "bin/placeholder/Model.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ClassLibrary1.dll": {}
+          "bin/placeholder/Model.dll": {}
         }
       },
       "WebApplication1/1.0.0": {
@@ -28,10 +41,15 @@
     }
   },
   "libraries": {
-    "ClassLibrary1/1.0.0": {
+    "Controller/1.0.0": {
       "type": "project",
-      "path": "../ClassLibrary1/ClassLibrary1.csproj",
-      "msbuildProject": "../ClassLibrary1/ClassLibrary1.csproj"
+      "path": "../Controller/Controller.csproj",
+      "msbuildProject": "../Controller/Controller.csproj"
+    },
+    "Model/1.0.0": {
+      "type": "project",
+      "path": "../ClassLibrary1/Model.csproj",
+      "msbuildProject": "../ClassLibrary1/Model.csproj"
     },
     "WebApplication1/1.0.0": {
       "type": "project",
@@ -41,7 +59,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "ClassLibrary1 >= 1.0.0",
+      "Controller >= 1.0.0",
+      "Model >= 1.0.0",
       "WebApplication1 >= 1.0.0"
     ]
   },
@@ -72,8 +91,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\ClassLibrary1.csproj": {
-              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\ClassLibrary1.csproj"
+            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj": {
+              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj"
+            },
+            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\Controller\\Controller.csproj": {
+              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\Controller\\Controller.csproj"
             },
             "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\WebApplication1\\WebApplication1.csproj": {
               "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\WebApplication1\\WebApplication1.csproj"
