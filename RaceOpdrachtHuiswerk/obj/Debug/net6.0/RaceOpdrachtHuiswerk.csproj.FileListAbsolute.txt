@@ -39,3 +39,5 @@ C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_So
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.pdb
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.genruntimeconfig.cache
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\ref\RaceOpdrachtHuiswerk.dll
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.dll
+C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.pdb

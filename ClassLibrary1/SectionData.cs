@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class SectionData
+    public class SectionData
     {
-        #region Variabelen
+        #region Properties
         IParticipant Left { get; set; }
         int DistanceLeft { get; set; }
         IParticipant Right { get; set; }

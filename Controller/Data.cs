@@ -11,29 +11,40 @@ namespace Controller
 {
     public static class Data
     {
-        static Competition competition;
+        public static Competition Competition;
+        public static Race CurrentRace;
 
         static Data()
         {
             Initialize();
         }
 
+        public static void NextRace()
+        {
+            Track track = Competition.NextTrack();
+            if(track != null)
+            {
+                CurrentRace = new Race(track, Competition.Participants);
+            }
+        }
+
         public static void Initialize()
         {
-            competition = new Competition();
+            Competition = new Competition();
             addParticipants();
+            addTracks();
         }
 
         public static void addParticipants()
         {
-            Driver driver = new Driver(Name, Points);
-            competition.Participants.Add((IParticipant)driver);
+            Competition.Participants.Add(new Driver("Stinksok", 15));
         }
 
-        public static void addTracks(Name, Section)
+        public static void addTracks()
         {
-            Track track = new Track(Name, Section);
-            competition.Sections.Add(Track);
+            Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[0]));
+            Competition.Tracks.Enqueue(new Track("Mushroom Village", new Section.SectionTypes[0]));
+            Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[0]));
         }
     }
         

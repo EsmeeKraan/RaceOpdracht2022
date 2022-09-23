@@ -8,7 +8,7 @@ namespace Model
 {
     public class Section
     {
-        #region Variabelen
+        #region Properties
         public SectionTypes SectionType { get; set; }
         #endregion
 

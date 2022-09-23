@@ -8,13 +8,17 @@ namespace Model
 {
     public class Competition
     {
-        #region Variabelen
-        public List<IParticipant> Participants;
-        public Queue<Track> Tracks;
+        #region Properties
+        public List<IParticipant> Participants = new();
+        public Queue<Track> Tracks = new();
         #endregion
 
         #region Methodes
         public Track NextTrack() {
+            if(Tracks.Count == 0)
+            {
+                return null;
+            }
             return Tracks.Dequeue();
         }
         #endregion

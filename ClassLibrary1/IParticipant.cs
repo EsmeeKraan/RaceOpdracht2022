@@ -8,10 +8,14 @@ namespace Model
 {
     public interface IParticipant
     {
+        #region Properties
         string Name { get; }
         int Points { get; }
         IEquipment Equipment { get; }
         TeamColors TeamColor { get; }
+        #endregion
+
+        #region Enums
 
         public enum TeamColors
         {
@@ -21,6 +25,7 @@ namespace Model
             Yellow,
             Grey
         }
+        #endregion
 
     }
 }

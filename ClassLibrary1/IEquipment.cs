@@ -8,9 +8,11 @@ namespace Model
 {
     public interface IEquipment
     {
-        int Quality {  get; }  
-        int Performance { get; }   
-        int Speed { get; }
-        bool isBroken { get; }
+        #region Properties
+        int Quality { get; set;  }  
+        int Performance { get; set; }   
+        int Speed { get; set; }
+        bool IsBroken { get; set; }
+        #endregion
     }
 }
