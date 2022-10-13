@@ -37,16 +37,60 @@ namespace Controller
 
         public static void addParticipants()
         {
-            Competition.Participants.Add(new Driver("Stinksok", 15));
+            Competition.Participants.Add(new Driver("Yoshi", 0));
+            Competition.Participants.Add(new Driver("Mario", 0));
+            Competition.Participants.Add(new Driver("Toad", 0));
+            Competition.Participants.Add(new Driver("Donkey Kong", 0));
+            Competition.Participants.Add(new Driver("Peach", 0));
+            Competition.Participants.Add(new Driver("Waluigi", 0));
+            Competition.Participants.Add(new Driver("Luigi", 0));
+            Competition.Participants.Add(new Driver("Bowser", 0));
         }
 
         public static void addTracks()
         {
-            Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[0]));
+            Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[] {
+                                                                      Section.SectionTypes.RightCorner,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.StartGrid,
+                                                                      Section.SectionTypes.StartGrid,
+                                                                      Section.SectionTypes.StartGrid,
+                                                                      Section.SectionTypes.StartGrid,
+                                                                      Section.SectionTypes.Finish,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.RightCorner,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.RightCorner,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.RightCorner,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                      Section.SectionTypes.Straight,
+                                                                    }));
             Competition.Tracks.Enqueue(new Track("Mushroom Village", new Section.SectionTypes[0]));
             Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[0]));   
-            
-
         }
     }
         

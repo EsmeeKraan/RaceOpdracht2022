@@ -13,7 +13,7 @@ Data.NextRace();
 Console.WriteLine(Data.CurrentRace.Track.Name);*/
 
 VisualisatieStatic.Initialize();
-VisualisatieStatic.DrawTrack(new Track("Rainbow Road", new Section.SectionTypes[1]));
+VisualisatieStatic.DrawTrack(Data.CurrentRace);
 
 
 

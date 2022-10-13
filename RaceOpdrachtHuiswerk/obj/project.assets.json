@@ -65,19 +65,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\esmee\\.nuget\\packages\\": {}
+    "C:\\Users\\MSI\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\RaceOpdrachtHuiswerk\\RaceOpdrachtHuiswerk.csproj",
+      "projectUniqueName": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\RaceOpdrachtHuiswerk\\RaceOpdrachtHuiswerk.csproj",
       "projectName": "RaceOpdrachtHuiswerk",
-      "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\RaceOpdrachtHuiswerk\\RaceOpdrachtHuiswerk.csproj",
-      "packagesPath": "C:\\Users\\esmee\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\RaceOpdrachtHuiswerk\\obj\\",
+      "projectPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\RaceOpdrachtHuiswerk\\RaceOpdrachtHuiswerk.csproj",
+      "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\RaceOpdrachtHuiswerk\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\esmee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -91,14 +91,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj": {
-              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\ClassLibrary1\\Model.csproj"
+            "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\ClassLibrary1\\Model.csproj": {
+              "projectPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\ClassLibrary1\\Model.csproj"
             },
-            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\Controller\\Controller.csproj": {
-              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\Controller\\Controller.csproj"
+            "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\Controller\\Controller.csproj": {
+              "projectPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\Controller\\Controller.csproj"
             },
-            "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\WebApplication1\\WebApplication1.csproj": {
-              "projectPath": "C:\\Users\\esmee\\OneDrive\\Bureaublad\\School Jaar 2\\C#\\Code\\RaceOpdrachtHuiswerk_Solution\\WebApplication1\\WebApplication1.csproj"
+            "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj": {
+              "projectPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj"
             }
           }
         }
@@ -128,7 +128,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

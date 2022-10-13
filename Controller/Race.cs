@@ -30,11 +30,19 @@ namespace Controller
         {
             Queue<IParticipant> participantsTemp = new Queue<IParticipant>(participants);
 
-            if (track.Sections.First != null)
+            foreach(Section section in track.Sections)
             {
-                SectionData? sectionData = getSectionData(track.Sections.First.Value);
-                sectionData!.Left = participantsTemp.Dequeue();
-                sectionData!.Right = participantsTemp.Dequeue();
+                if(section.SectionType == Section.SectionTypes.StartGrid)
+                {
+                    SectionData? sectionData = getSectionData(section);
+
+                    if (participantsTemp.Count == 0)
+                        return;
+                    sectionData!.Left = participantsTemp.Dequeue();
+                    if (participantsTemp.Count == 0)
+                        return;
+                    sectionData!.Right = participantsTemp.Dequeue();
+                }
             }
         }
 

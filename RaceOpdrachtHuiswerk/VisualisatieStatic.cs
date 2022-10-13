@@ -2,159 +2,260 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RaceOpdrachtHuiswerk.VisualisatieStatic;
 
 namespace RaceOpdrachtHuiswerk
 {
     static class VisualisatieStatic
     {
         #region graphics
-        private static string[] _finishHorizontal = { "═══════",
-                                                      "  #    ",
-                                                      "  #    ",
-                                                      "═══════" };
+        private static string[] _finishHorizontal = { "═",
+                                                      "#",
+                                                      "#",
+                                                      "═" };
 
-        private static string[] _startHorizontal = { "═══════",
-                                                     "  *    ",
-                                                     "  *    ",
-                                                     "═══════" };
 
-        private static string[] _finishVertical = {"║      ║",
-                                                   "║  #   ║",
-                                                   "║  #   ║",
-                                                   "║      ║" };
+        private static string[] _startHorizontal = { "═",
+                                                     "L",
+                                                     "R",
+                                                     "═" };
 
-        private static string[] _startVertical = { "║      ║",
-                                                   "║  *   ║",
-                                                   "║  *   ║",
-                                                   "║      ║" };
 
-        private static string[] _straightHorizontal = { "═══════", 
-                                                        "   1 ", 
-                                                        "   2 ", 
-                                                        "═══════" };
+        private static string[] _finishVertical = {"║ #  # ║", };
 
-        private static string[] _straightVertical = { "║  1   ║", 
-                                                      "║   2  ║", 
-                                                      "║  1   ║", 
-                                                      "║   2  ║" };
+
+        private static string[] _startVertical = {"║ *  * ║", };
+
+
+        private static string[] _straightHorizontal = { "═", 
+                                                        "L", 
+                                                        "R", 
+                                                        "═" };
+
+
+        private static string[] _straightVertical = { "║ L  R ║", };
 
         private static string[] _rightDown = { "═══════╗"
-                                             , "   1   ║"
-                                             , "   2   ║"
-                                             , "╗   2  ║" };
+                                             , "    R  ║"
+                                             , "  L    ║"
+                                             , "╗      ║" };
 
-        private static string[] _leftDown = { "║   1  ╚", 
-                                              "║ 2     ",
-                                              "║   1   ",
+
+        private static string[] _leftDown = { "║      ╚", 
+                                              "║    L  ",
+                                              "║  R    ",
                                               "╚═══════" };
 
         private static string[] _rightUp = { "╔═══════",
-                                             "║    1  2",
-                                             "║   2   ",
+                                             "║  R    ",
+                                             "║    L  ",
                                              "║      ╔" };
 
-        private static string[] _leftUp = { "╝   1  ║", 
-                                            "   1   ║", 
-                                            "   2   ║", 
+
+        private static string[] _leftUp = { "╝      ║", 
+                                            "  L    ║", 
+                                            "     R ║", 
                                             "═══════╝" };
 
         #endregion
 
         public enum Directions
         {
-            North,
-            East,
-            South,
-            West,
+            North,  // verticaal
+            East,   // horizontaal
+            South,  // verticaal
+            West,   // horizontaal
         }
         public static void Initialize()
         {
 
         }
 
-        public static void DrawTrack(Track track)
+        public static void DrawTrack(Race race)
         {
+            Track track = race.Track;
+
             Console.WriteLine(track.Name);
 
-            foreach (Section section in track.Sections)
+            int startpositieX = 25;
+            int startpositieY = 5;
+
+            Directions HuidigeDirection = Directions.North;
+
+            var it = track.Sections.First;
+
+            while(it != null)
             {
-                Directions HuidigeDirection = Directions.East;
-                Section.SectionTypes WatVoorBaanType = Section.SectionTypes.Straight;
+                string[]? symbool = getSymbol(it.Value, HuidigeDirection);
+                var sectionData = race.getSectionData(it.Value);
+                it = it.Next;
 
-                int startpositieX = 25;
-                int startpositieY = 5;
-
-                ConsoleWriteSection(_startHorizontal, startpositieX, startpositieY);
-
-
-                if (HuidigeDirection == Directions.East)
+                if(symbool == null)
                 {
-                    startpositieX += 7;
-                    ConsoleWriteSection(_finishHorizontal, startpositieX, startpositieY);
-                    startpositieX += 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    startpositieX += 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    HuidigeDirection = Directions.South;
-                    WatVoorBaanType = Section.SectionTypes.RightCorner;
-                }
-                if (HuidigeDirection == Directions.South)
+                    continue;
+                } else
                 {
-                    startpositieX += 7;
-                    ConsoleWriteSection(_rightDown, startpositieX, startpositieY);
-                    startpositieY += 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    startpositieY += 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    startpositieY += 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    HuidigeDirection = Directions.West;
-                }
-                if (HuidigeDirection == Directions.West)
-                {
-                    startpositieY += 4;
-                    ConsoleWriteSection(_leftUp, startpositieX, startpositieY);
-                    startpositieX -= 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    startpositieX -= 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    startpositieX -= 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    startpositieX -= 7;
-                    ConsoleWriteSection(_straightHorizontal, startpositieX, startpositieY);
-                    HuidigeDirection = Directions.North;
-                }
-                if (HuidigeDirection == Directions.North)
-                {
-                    startpositieX -= 7;
-                    ConsoleWriteSection(_leftDown, startpositieX, startpositieY);
-                    startpositieY -= 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    startpositieY -= 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    startpositieY -= 4;
-                    ConsoleWriteSection(_straightVertical, startpositieX, startpositieY);
-                    startpositieY -= 4;
-                    ConsoleWriteSection(_rightUp, startpositieX, startpositieY);
-                }
+                    ConsoleWriteSection(symbool, startpositieX, startpositieY, sectionData);
 
-            }
+                    if(it == null)
+                    {
+                        break;
+                    }
+
+                    if(it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
+                    {
+                        switch (HuidigeDirection)
+                        {
+                            case Directions.North:
+                                {
+                                    HuidigeDirection = Directions.East;
+                                }
+                                break;
+                            case Directions.East:
+                                {
+                                    HuidigeDirection = Directions.South;
+                                }
+                                break;
+                            case Directions.South:
+                                {
+                                    HuidigeDirection = Directions.West;
+                                }
+                                break;
+                            case Directions.West:
+                                {
+                                    HuidigeDirection = Directions.North;
+                                }
+                                break;
+                        }
+                    }
+
+                    string[]? volgendeSymbool = getSymbol(it.Value, HuidigeDirection);
+                    if(volgendeSymbool != null)
+                    {
+                        switch (HuidigeDirection)
+                        {
+                            case Directions.North:
+                                startpositieY -= volgendeSymbool.Length;
+                                break;
+                            case Directions.South:
+                                startpositieY += symbool.Length;
+                                break;
+                            case Directions.East:
+                                startpositieX += symbool[0].Length;
+                                break;
+                            case Directions.West:
+                                startpositieX -= volgendeSymbool[0].Length;
+                                break;
+                        }
+                    }
+                }
+            } 
         }
-        #region TekenMethodes
+        
 
-        public static void ConsoleWriteSection(string[] sectionStrings, int x, int y)
+        public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
         {
+            char left = ' ';
+            char right = ' ';
+
+            if(sectionData != null)
+            {
+                if(sectionData.Left != null)
+                {
+                    left = sectionData.Left.Name[0];
+                }
+                if (sectionData.Right != null)
+                {
+                    right = sectionData.Right.Name[0];
+                }
+            }
+
             foreach (string s in sectionStrings)
             {
                 Console.SetCursorPosition(x, y);
-                Console.WriteLine(s);
+                Console.WriteLine(s.Replace('L', left).Replace('R', right));
                 y++;
             }
         }
 
-        #endregion
+        public static string[] getSymbol(Section section, Directions HuidigeDirection)
+        {
+            switch (section.SectionType)
+            {
+                case Section.SectionTypes.RightCorner:
+                    switch (HuidigeDirection)
+                    {
+                        case Directions.South:
+                            return _leftUp;
+                        case Directions.West:
+                            return _leftDown;
+                        case Directions.North:
+                            return _rightUp;
+                        case Directions.East:
+                            return _rightDown;
+                    }
+                    break;
+                case Section.SectionTypes.LeftCorner:
+                    switch (HuidigeDirection)
+                    {
+                        case Directions.South:
+                            return _leftDown;
+                        case Directions.West:
+                            return _leftUp;
+                        case Directions.North:
+                            return _rightDown;
+                        case Directions.East:
+                            return _rightUp;
+                    }
+                    break;
+                case Section.SectionTypes.Straight:
+                    {
+                        switch (HuidigeDirection)
+                        {
+                            case Directions.South:
+                            case Directions.North:
+                                return _straightVertical;
+                            case Directions.East:
+                            case Directions.West:
+                                return _straightHorizontal;
+                        }
+                        break;
+                    }
+                case Section.SectionTypes.StartGrid:
+                    {
+                        switch (HuidigeDirection)
+                        {
+                            case Directions.South:
+                            case Directions.North:
+                                return _startVertical;
+                            case Directions.East:
+                            case Directions.West:
+                                return _startHorizontal;
+                        }
+                        break;
+                    }
+                case Section.SectionTypes.Finish:
+                    {
+                        switch (HuidigeDirection)
+                        {
+                            case Directions.South:
+                            case Directions.North:
+                                return _finishVertical;
+                            case Directions.East:
+                            case Directions.West:
+                                return _finishHorizontal;
+                        }
+                        break;
+                    }
+            }
+            return null;
+
+        }
+
+
     }
 }

@@ -13,3 +13,18 @@ C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_So
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\Controller\obj\Debug\net6.0\refint\Controller.dll
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\Controller\obj\Debug\net6.0\Controller.pdb
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\Controller\obj\Debug\net6.0\ref\Controller.dll
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\bin\Debug\net6.0\Controller.deps.json
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\bin\Debug\net6.0\Controller.dll
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\bin\Debug\net6.0\Controller.pdb
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\bin\Debug\net6.0\Model.dll
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\bin\Debug\net6.0\Model.pdb
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.csproj.AssemblyReference.cache
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.AssemblyInfoInputs.cache
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.AssemblyInfo.cs
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.csproj.CoreCompileInputs.cache
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.csproj.CopyComplete
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.dll
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\refint\Controller.dll
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\Controller.pdb
+C:\Users\MSI\Source\Repos\RaceOpdracht2022\Controller\obj\Debug\net6.0\ref\Controller.dll

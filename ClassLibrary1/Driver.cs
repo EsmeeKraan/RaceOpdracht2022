@@ -9,19 +9,20 @@ namespace Model
     public class Driver : IParticipant
     {
         #region Properties
-        public string Name => throw new NotImplementedException();
+        public string Name { get; set; }
 
-        public int Points => throw new NotImplementedException();
+        public int Points { get; set; }
 
-        public IEquipment Equipment => throw new NotImplementedException();
+        public IEquipment Equipment { get; set; }
 
-        public IParticipant.TeamColors TeamColor => throw new NotImplementedException();
+        public IParticipant.TeamColors TeamColor { get; set; }
         #endregion
+
         #region Constructors
-        public Driver(string Name, int Points)
+        public Driver(string name, int points)
         {
-            Name = "Driver";
-            Points = 0;
+            Name = name;
+            Points = points;
         }
         #endregion
     }
