@@ -9,10 +9,10 @@ namespace Model
     public class SectionData
     {
         #region Properties
-        IParticipant Left { get; set; }
-        int DistanceLeft { get; set; }
-        IParticipant Right { get; set; }
-        int DistanceRight { get; set; }
+        public IParticipant Left { get; set; }
+        public int DistanceLeft { get; set; }
+        public IParticipant Right { get; set; }
+        public int DistanceRight { get; set; }
         #endregion
     }
 }

@@ -44,7 +44,9 @@ namespace Controller
         {
             Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[0]));
             Competition.Tracks.Enqueue(new Track("Mushroom Village", new Section.SectionTypes[0]));
-            Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[0]));
+            Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[0]));   
+            
+
         }
     }
         

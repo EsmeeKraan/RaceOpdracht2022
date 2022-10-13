@@ -23,6 +23,19 @@ namespace Controller
             StartTime = DateTime.Now;
             _random = new(DateTime.Now.Millisecond);
             _positions = new();
+            setDriverStartPosition(track, participants);
+        }
+
+        public void setDriverStartPosition(Track track, List<IParticipant> participants)
+        {
+            Queue<IParticipant> participantsTemp = new Queue<IParticipant>(participants);
+
+            if (track.Sections.First != null)
+            {
+                SectionData? sectionData = getSectionData(track.Sections.First.Value);
+                sectionData!.Left = participantsTemp.Dequeue();
+                sectionData!.Right = participantsTemp.Dequeue();
+            }
         }
 
         public SectionData getSectionData(Section section)

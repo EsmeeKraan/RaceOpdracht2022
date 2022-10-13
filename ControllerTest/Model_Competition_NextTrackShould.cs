@@ -26,6 +26,7 @@ namespace ControllerTest
             var result = _competition.NextTrack();
             Assert.IsNull(result);
         }
+        [Test]
 
         public void NextTrack_OneInQueue_ReturnTrack()
         {
@@ -34,6 +35,7 @@ namespace ControllerTest
             var result = _competition.NextTrack();
             Assert.AreEqual(track, result);
         }
+        [Test]
 
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
         {
@@ -44,6 +46,7 @@ namespace ControllerTest
             Assert.AreEqual(track, result);
 
         }
+        [Test]
 
         public void NextTrack_TwoInQueue_ReturnNextTrack()
         {
