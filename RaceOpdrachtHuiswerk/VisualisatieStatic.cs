@@ -63,6 +63,8 @@ namespace RaceOpdrachtHuiswerk
 
         #endregion
 
+        private static Race _currentRace;
+
         public enum Directions
         {
             North,  // verticaal
@@ -70,16 +72,21 @@ namespace RaceOpdrachtHuiswerk
             South,  // verticaal
             West,   // horizontaal
         }
-        public static void Initialize()
+        public static void Initialize(Race race)
         {
+            _currentRace = race;
 
+        }
+
+        private static void PrepareConsole()
+        {
+            Console.Clear();
+            Console.WriteLine($"Track: {_currentRace.Track.Name}");
         }
 
         public static void DrawTrack(Race race)
         {
             Track track = race.Track;
-
-            Console.WriteLine(track.Name);
 
             int startpositieX = 25;
             int startpositieY = 5;
@@ -155,8 +162,22 @@ namespace RaceOpdrachtHuiswerk
                 }
             } 
         }
-        
 
+        private static void DriversChanged(object sender, DriversChangedEventArgs e)
+        {
+            /*DrawTrack(e.Track);*/
+        }
+
+        public static void NextRaceEvent(object sender, NextRaceEventArgs e)
+        {
+            // reinitialize
+            Initialize(e.Race);
+
+            // link events, draw track first time
+            _currentRace.DriversChanged += DriversChanged;
+                
+            /*DrawTrack(_currentRace.Track)*/;
+        }
         public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
         {
             char left = ' ';

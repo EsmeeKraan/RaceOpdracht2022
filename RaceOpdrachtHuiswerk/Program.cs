@@ -12,7 +12,7 @@ Console.WriteLine(Data.CurrentRace.Track.Name);
 Data.NextRace();
 Console.WriteLine(Data.CurrentRace.Track.Name);*/
 
-VisualisatieStatic.Initialize();
+VisualisatieStatic.Initialize(Data.CurrentRace);
 VisualisatieStatic.DrawTrack(Data.CurrentRace);
 
 

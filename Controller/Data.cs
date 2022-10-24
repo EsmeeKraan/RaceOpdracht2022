@@ -14,6 +14,10 @@ namespace Controller
         public static Competition Competition;
         public static Race CurrentRace;
 
+        public static event EventHandler<NextRaceEventArgs> NextRaceEvent;
+
+        private static bool _lastRace;
+
         static Data()
         {
             Initialize();
@@ -21,10 +25,19 @@ namespace Controller
 
         public static void NextRace()
         {
+            CurrentRace?.CleanUp();
+
             Track track = Competition.NextTrack();
             if(track != null)
             {
                 CurrentRace = new Race(track, Competition.Participants);
+                NextRaceEvent?.Invoke(null, new NextRaceEventArgs() { Race = CurrentRace });
+                CurrentRace.Start();
+            }
+            else if (!_lastRace)
+            {
+                NextRaceEvent?.Invoke(null, new NextRaceEventArgs() { Race = CurrentRace });
+                _lastRace = true;
             }
         }
 
@@ -91,6 +104,11 @@ namespace Controller
                                                                     }));
             Competition.Tracks.Enqueue(new Track("Mushroom Village", new Section.SectionTypes[0]));
             Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[0]));   
+        }
+
+        private static void OnRaceFinished(object sender, EventArgs e)
+        {
+            NextRace();
         }
     }
         

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MSI\\Source\\Repos\\RaceOpdracht2022\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
