@@ -31,6 +31,7 @@ namespace Controller
             if(track != null)
             {
                 CurrentRace = new Race(track, Competition.Participants);
+                CurrentRace.RaceFinished += OnRaceFinished;
                 NextRaceEvent?.Invoke(null, new NextRaceEventArgs() { Race = CurrentRace });
                 CurrentRace.Start();
             }

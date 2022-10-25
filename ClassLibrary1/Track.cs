@@ -12,6 +12,7 @@ namespace Model
         #region Properties
         public string Name { get; set; }
         public LinkedList<Section> Sections { get; set; }
+
         #endregion
 
         #region Constructors
