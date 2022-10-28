@@ -19,7 +19,10 @@ namespace RaceOpdrachtHuiswerk
     }
     public static class VisualisatieStatic
     {
+        private static readonly object _lock = new();
+
         #region graphics
+
         private static string[] _finishHorizontal = { "═",
                                                       "#",
                                                       "#",
@@ -82,9 +85,13 @@ namespace RaceOpdrachtHuiswerk
 
         private static void PrepareConsole()
         {
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine($"Track: {_currentRace.Track.Name}");
+            Console.CursorVisible = false;
+            lock (_lock)
+            {
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine($"Track: {_currentRace.Track.Name}");
+            }
         }
 
         public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
@@ -108,19 +115,20 @@ namespace RaceOpdrachtHuiswerk
                 var sectionData = _currentRace.GetSectionData(it.Value);
                 it = it.Next;
 
-                if(symbool == null)
+                if (symbool == null)
                 {
                     continue;
-                } else
+                }
+                else
                 {
                     ConsoleWriteSection(symbool, startpositieX, startpositieY, sectionData);
 
-                    if(it == null)
+                    if (it == null)
                     {
                         break;
                     }
 
-                    if(it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
+                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
                     {
                         switch (_currentDirection)
                         {
@@ -147,8 +155,34 @@ namespace RaceOpdrachtHuiswerk
                         }
                     }
 
+                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.LeftCorner)
+                    {
+                        switch (_currentDirection)
+                        {
+                            case Directions.North:
+                                {
+                                    _currentDirection = Directions.West;
+                                }
+                                break;
+                            case Directions.East:
+                                {
+                                    _currentDirection = Directions.North;
+                                }
+                                break;
+                            case Directions.South:
+                                {
+                                    _currentDirection = Directions.East;
+                                }
+                                break;
+                            case Directions.West:
+                                {
+                                    _currentDirection = Directions.South;
+                                }
+                                break;
+                        }
+                    }
                     string[]? volgendeSymbool = getSymbol(it.Value, _currentDirection);
-                    if(volgendeSymbool != null)
+                    if (volgendeSymbool != null)
                     {
                         switch (_currentDirection)
                         {
@@ -172,9 +206,15 @@ namespace RaceOpdrachtHuiswerk
 
         private static void OnDriversChanged(object sender, DriversChangedEventArgs e)
         {
-            DrawTrack(e.Track);
+            var race = Data.CurrentRace;
+            lock (_lock)
+            {
+                if (race.IsOver)
+                    return;
+                DrawTrack(e.Track);
+            }
         }
-        public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
+            public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
         {
             char left = ' ';
             char right = ' ';
@@ -194,6 +234,8 @@ namespace RaceOpdrachtHuiswerk
 
             foreach (string s in sectionStrings)
             {
+                if (y < 0)
+                    continue;
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine(s.Replace('L', left).Replace('R', right));
                 y++;
@@ -223,11 +265,11 @@ namespace RaceOpdrachtHuiswerk
                         case Directions.South:
                             return _leftDown;
                         case Directions.West:
-                            return _leftUp;
+                            return _rightUp;
                         case Directions.North:
                             return _rightDown;
                         case Directions.East:
-                            return _rightUp;
+                            return _leftUp;
                     }
                     break;
                 case Section.SectionTypes.Straight:

@@ -1,9 +1,11 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -12,29 +14,25 @@ namespace Controller
 {
     public class Race
     {
-
-        public enum Side
-        {
-            Left,
-            Right
-        }
         public Track Track;
         public List<IParticipant> Participants;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        private Random _random;
-        private Dictionary<Section, SectionData> _positions;
+        private Random _random = new();
+        private Dictionary<Section, SectionData> _positions = new();
+        public bool IsOver { get; private set; }
 
         private readonly System.Timers.Timer _timer;
-        private const int _timerInterval = 500;
+        private const int _timerInterval = 20;
+        private DateTime _lastSeenBroken = DateTime.Now;
 
         private const int _laps = 3;
-        private Dictionary<IParticipant, int> _lapsDriven;
+        private Dictionary<IParticipant, int> _lapsDriven = new();
 
-        private Dictionary<IParticipant, DateTime> _ParticipantLapTime;
+        private Dictionary<IParticipant, DateTime> _ParticipantLapTime = new();
 
-        private List<IParticipant> _finishOrder;
+        private List<IParticipant> _finishOrder = new();
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
@@ -52,7 +50,7 @@ namespace Controller
             _timer.Elapsed += OnTimedEvent;
 
             SetDriverStartPosition(track, participants);
-            /*RandomizeEquipment();*/
+            RandomizeEquipment();
             InitializeFirstLap();
         }
 
@@ -98,6 +96,7 @@ namespace Controller
         public void UpdateLap(IParticipant participant, DateTime time)
         {
             _lapsDriven[participant]++;
+            Console.Title = $"{participant.Name} just got to lap {_lapsDriven[participant]}";
             if (_lapsDriven[participant] <= 0) return;
             _ParticipantLapTime[participant] = time;
         }
@@ -118,13 +117,13 @@ namespace Controller
 
             while (currentSectionNode != null)
             {
-                MoveSectionData(currentSectionNode.Value, currentSectionNode.Next != null ? currentSectionNode.Next.Value : Track.Sections.First?.Value, time);
+                MoveSectionData(currentSectionNode.Value, (currentSectionNode.Next?.Value ?? Track.Sections.First?.Value)!, time, currentSectionNode);
 
                 currentSectionNode = currentSectionNode.Previous;
             }
         }
 
-        public void MoveSingleParticipant(Section currentSection, Section nextSection, Side start, Side end, bool correctOtherSide, DateTime time)
+/*        public void MoveSingleParticipant(Section currentSection, Section nextSection, Side start, Side end, bool correctOtherSide, DateTime time)
         {
             SectionData currentSectionData = GetSectionData(currentSection);
             SectionData nextSectionData = GetSectionData(nextSection);
@@ -176,7 +175,7 @@ namespace Controller
                             }
                             break;
                     }
-                    currentSectionData.Right = null;
+                    currentSectionData.Left = null;
                     currentSectionData.DistanceRight = 0;
                     break;
             }
@@ -188,25 +187,55 @@ namespace Controller
             {
                 currentSectionData.DistanceRight = 99;
             }
-        }
-        public void MoveSectionData(Section currentSection, Section nextSection, DateTime time)
+        }*/
+        public void MoveSectionData(Section currentSection, Section nextSection, DateTime time, LinkedListNode<Section> node)
         {
-            _timer.Stop();
+            //_timer.Stop();
 
                 SectionData currentSectionData = GetSectionData(currentSection);
                 SectionData nextSectionData = GetSectionData(nextSection);
 
-/*                if (currentSectionData.Left != null && !currentSectionData.Left.Equipment.IsBroken)
+            if (currentSectionData.Left != null && !currentSectionData.Left.Equipment.IsBroken)
+            {
+                currentSectionData.DistanceLeft += GetSpeedFromCompetitor(currentSectionData.Left);
+                Side nextSide = Side.Left;
+                while (true)
                 {
-                    currentSectionData.DistanceLeft += GetSpeedFromCompetitor(currentSectionData.Left);
+                    Side? side = Tristan_MoveLane(nextSide, currentSectionData, nextSectionData, time, currentSection.SectionType);
+                    
+                    if (side == null)
+                        break;
+                    
+
+                    nextSide = (Side)side;
+                    currentSectionData = nextSectionData;
+                    nextSectionData = GetSectionData(node.Previous?.Value ?? Track.Sections.First!.Value);
                 }
+            }
 
-                if (currentSectionData.Right != null && !currentSectionData.Right.Equipment.IsBroken)
+            if (currentSectionData.Right != null && !currentSectionData.Right.Equipment.IsBroken)
+            {
+                currentSectionData.DistanceRight += GetSpeedFromCompetitor(currentSectionData.Right);
+                Side nextSide = Side.Right;
+                while (true)
                 {
-                    currentSectionData.DistanceRight += GetSpeedFromCompetitor(currentSectionData.Right);
-                }*/
+                    Side? side = Tristan_MoveLane(nextSide, currentSectionData, nextSectionData, time, currentSection.SectionType);
+                    if (side == null)
+                        break;
 
-                if(currentSectionData.DistanceLeft >= 100 && currentSectionData.DistanceRight >= 100)
+
+                    nextSide = (Side)side;
+                    currentSection = nextSection;
+                    currentSectionData = nextSectionData;
+                    nextSection = node.Previous?.Value ?? Track.Sections.First!.Value;
+                    nextSectionData = GetSectionData(nextSection);
+                }
+            }
+
+            
+
+#if no
+2            if (currentSectionData.DistanceLeft >= 100 && currentSectionData.DistanceRight >= 100)
                 {
                     #region Beide participants kunnen bewegen
                     int freePlace = CheckIfFreePlace(nextSectionData);
@@ -223,7 +252,6 @@ namespace Controller
                     }
                     else
                     {
-                        // TODO: handle edge cases a little better when a choice must be made
                         if (currentSectionData.DistanceLeft >= currentSectionData.DistanceRight)
                         {
                             // prefer left
@@ -243,110 +271,172 @@ namespace Controller
                     }
                     #endregion
                 }
-                else if (currentSectionData.DistanceLeft >= 100)
-                {
-                    #region Linker participant kan bewegen
+            else if (currentSectionData.DistanceLeft >= 100 && currentSectionData.Left != null)
+            {
+                #region Linker participant kan bewegen
 
-                    // for freesections, prefer same spot, otherwise take other
-                    int freePlaces = CheckIfFreePlace(nextSectionData);
-                    if (freePlaces == 0)
-                        currentSectionData.DistanceLeft = 99;
-                    else if (freePlaces == 3 || freePlaces == 1)
-                        // move from left to left
-                        MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Left, false, time);
-                    else if (freePlaces == 2)
-                        // move from left to right
-                        MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Right, false, time);
+                // for freesections, prefer same spot, otherwise take other
+                int freePlaces = CheckIfFreePlace(nextSectionData);
+                if (freePlaces == 0)
+                    currentSectionData.DistanceLeft = 100;
+                else if (freePlaces == 3 || freePlaces == 1)
+                    // move from left to left
+                    MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Left, false, time);
+                else if (freePlaces == 2)
+                    // move from left to right
+                    MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Right, false, time);
 
-                    #endregion
-                }
-                else if (currentSectionData.DistanceRight >= 100)
-                {
-                    #region Rechter participant kan bewegen
+                #endregion
+            }
+            else if (currentSectionData.DistanceRight >= 100 && currentSectionData.Right != null)
+            {
+                #region Rechter participant kan bewegen
 
-                    // for freesections, prefer same spot, otherwise take other
-                    int freePlaces = CheckIfFreePlace(nextSectionData);
-                    if (freePlaces == 0)
-                        currentSectionData.DistanceRight = 99;
-                    else if (freePlaces == 3 || freePlaces == 2)
-                        // move from right to right
-                        MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Right, false, time);
-                    else if (freePlaces == 1)
-                        // move from right to left
-                        MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Left, false, time);
+                // for freesections, prefer same spot, otherwise take other
+                int freePlaces = CheckIfFreePlace(nextSectionData);
+                if (freePlaces == 0)
+                    currentSectionData.DistanceRight = 100;
+                else if (freePlaces == 3 || freePlaces == 2)
+                    // move from right to right
+                    MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Right, false, time);
+                else if (freePlaces == 1)
+                    // move from right to left
+                    MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Left, false, time);
 
-                    #endregion
-                }
+                #endregion
+            }
+#endif
         }
 
-        public int CheckIfFreePlace(SectionData track)
+        // returns if moved or not
+        private Side? Tristan_MoveLane(Side side, SectionData currentSectionData, SectionData nextSectionData, DateTime time, Section.SectionTypes currentSectionType)
         {
-            int placeHolder = 0;
-            if(track.Left == null)
+            var distance = side == Side.Left
+                         ? currentSectionData.DistanceLeft
+                         : currentSectionData.DistanceRight;
+
+            var participant = side == Side.Left
+                            ? currentSectionData.Left
+                            : currentSectionData.Right;
+
+            if (distance < 100)
+                return null;
+
+            if (currentSectionType == Section.SectionTypes.Finish)
             {
-                return placeHolder += 1;
+                if (UpdateLapAndFinish(currentSectionData, (Side)side, time))
+                    return null;
             }
-            if(track.Right == null)
+
+            Side? nextSide;
+            if (side == Side.Left)
             {
-                return placeHolder += 2;
+                nextSide = MoveToNextLeft(participant, distance, nextSectionData);
+                if (nextSide == null)
+                    nextSide = MoveToNextRight(participant, distance, nextSectionData);
+                if (nextSide == null)
+                    return null;
             }
-            return placeHolder;
+            else
+            {
+                nextSide = MoveToNextRight(participant, distance, nextSectionData);
+                if (nextSide == null)
+                    nextSide = MoveToNextLeft(participant, distance, nextSectionData);
+                if (nextSide == null)
+                    return null;
+            }
+
+            if (side == Side.Left)
+                currentSectionData.Left = null;
+            else
+                currentSectionData.Right = null;
+
+            return nextSide;
         }
 
-        public void UpdateLapAndFinish(SectionData sectiondata, Side side, DateTime time)
+        private Side? MoveToNextLeft(IParticipant participant, int distance, SectionData sectionData)
         {
-            if(side == Side.Right)
+            if (sectionData.Left != null)
+                return null;
+            sectionData.Left = participant;
+            sectionData.DistanceLeft = distance - 100;
+            return Side.Left;
+        }
+
+        private Side? MoveToNextRight(IParticipant participant, int distance, SectionData sectionData)
+        {
+            if (sectionData.Right != null)
+                return null;
+            sectionData.Right = participant;
+            sectionData.DistanceRight = distance - 100;
+            return Side.Right;
+        }
+
+        public bool UpdateLapAndFinish(SectionData sectiondata, Side side, DateTime time)
+        {
+            var participant = sectiondata.GetParticipant(side);
+            if (participant != null)
             {
-                UpdateLap(sectiondata.Right, time);
-                if (!ParticipantFinished(sectiondata.Right)) return;
-                _finishOrder.Add(sectiondata.Right);
-                sectiondata.Right = null;
+                UpdateLap(participant, time);
+                if (!ParticipantFinished(participant))
+                    return false;
+                _finishOrder.Add(participant);
+
+                Console.Title = $"{participant.Name} just finished!! :)  test l={sectiondata.Left?.Name} r={sectiondata.Right?.Name}  => {side}";
+
+                if (side == Side.Left)
+                    sectiondata.Left = null;
+                else
+                    sectiondata.Right = null;
+                return true;
             }
-            else if (side == Side.Left)
-            {
-                UpdateLap(sectiondata.Left, time);
-                if (!ParticipantFinished(sectiondata.Left)) return;
-                _finishOrder.Add(sectiondata.Left);
-                sectiondata.Left = null;
-            }
+            return false;
         }
 
 
         public int GetSpeedFromCompetitor(IParticipant iParticipant) => Convert.ToInt32(Math.Ceiling(0.12 * (iParticipant.Equipment.Speed * 0.51) * iParticipant.Equipment.Performance + 15));
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
+            CheckIfEquipmentsShouldBreakOrBeRepaired();
             MoveParticipant(e.SignalTime);
 
             DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track } );
 
             if (CheckIfFinished())
             {
+                _timer.Stop();
                 EndTime = e.SignalTime;
+                IsOver = true;
                 RaceFinished?.Invoke(this, new EventArgs());
+            }
+        }
+
+        private void CheckIfEquipmentsShouldBreakOrBeRepaired()
+        {
+            var now = DateTime.Now;
+            if ((now - _lastSeenBroken).TotalSeconds < 3)
+                return;
+
+            _lastSeenBroken = now;
+
+            foreach(var participant in Participants)
+            {
+                participant.Equipment.IsBroken = _random.Next(0, 100) > participant.Equipment.Quality;
             }
         }
 
         public SectionData GetSectionData(Section section)
         {
-            /*            if(_positions.TryGetValue(section, out SectionData? data))
-                        {
-                            return data;
-                        } else
-                        {
-                            SectionData nieuweSD = new SectionData();
-                            _positions.Add(section, nieuweSD);
-                            return nieuweSD;
-                        }*/
+
             if (!_positions.ContainsKey(section)) _positions.Add(section, new SectionData());
             return _positions[section];
         }
-
+        
         public void RandomizeEquipment()
         {
             foreach (var participant in Participants)
             {
-                participant.Equipment.Quality = _random.Next(12, 21);
-                participant.Equipment.Performance = _random.Next(6, 15);
+                participant.Equipment = new Car(_random.Next(40, 100), _random.Next(6, 50), _random.Next(6, 16));
             }
         }
 

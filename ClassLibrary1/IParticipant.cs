@@ -11,7 +11,7 @@ namespace Model
         #region Properties
         string Name { get; }
         int Points { get; }
-        IEquipment Equipment { get; }
+        IEquipment Equipment { get; set;  }
         TeamColors TeamColor { get; }
         #endregion
 

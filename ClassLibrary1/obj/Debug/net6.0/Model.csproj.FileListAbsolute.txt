@@ -22,3 +22,15 @@ C:\Users\MSI\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\refint\Model.dll
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.pdb
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\ref\Model.dll
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\bin\Debug\net6.0\Model.deps.json
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\bin\Debug\net6.0\Model.dll
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\bin\Debug\net6.0\Model.pdb
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.csproj.AssemblyReference.cache
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.AssemblyInfoInputs.cache
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.AssemblyInfo.cs
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.csproj.CoreCompileInputs.cache
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.dll
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\refint\Model.dll
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\Model.pdb
+C:\Users\esmee\Source\Repos\RaceOpdracht2022\ClassLibrary1\obj\Debug\net6.0\ref\Model.dll
