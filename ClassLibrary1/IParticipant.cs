@@ -23,7 +23,8 @@ namespace Model
             Green,  
             Blue,  
             Yellow,
-            Grey
+            Grey,
+            Orange
         }
         #endregion
 

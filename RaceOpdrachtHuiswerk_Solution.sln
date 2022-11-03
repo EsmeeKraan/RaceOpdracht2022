@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "ClassLibrary1\Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{66CD162E-BC84-47C9-85C8-65F545FA737F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{BF196A6C-2114-47E4-B104-0BFB8B50BC5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{BF196A6C-2114-47E4-B104-0BFB8B50BC5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{413672BA-4442-4281-98CD-AECB84B21698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Controller.csproj", "{413672BA-4442-4281-98CD-AECB84B21698}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{83ACFCEB-4240-4678-85CF-3D4065963D89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{413672BA-4442-4281-98CD-AECB84B21698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413672BA-4442-4281-98CD-AECB84B21698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{413672BA-4442-4281-98CD-AECB84B21698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83ACFCEB-4240-4678-85CF-3D4065963D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83ACFCEB-4240-4678-85CF-3D4065963D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83ACFCEB-4240-4678-85CF-3D4065963D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83ACFCEB-4240-4678-85CF-3D4065963D89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

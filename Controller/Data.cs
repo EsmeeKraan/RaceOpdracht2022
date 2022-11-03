@@ -38,6 +38,7 @@ namespace Controller
             else
             {
                 Console.Clear();
+                Console.SetCursorPosition(0, 0);
                 Console.Title = "Competition Over!";
                 foreach (var participant in Competition.Participants)
                 {

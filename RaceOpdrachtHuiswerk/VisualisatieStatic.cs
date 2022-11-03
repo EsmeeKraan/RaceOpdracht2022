@@ -19,7 +19,11 @@ namespace RaceOpdrachtHuiswerk
     }
     public static class VisualisatieStatic
     {
+
+        #region Properties
         private static readonly object _lock = new();
+        private static Race _currentRace;
+        private static Directions _currentDirection;
 
         #region graphics
 
@@ -73,9 +77,7 @@ namespace RaceOpdrachtHuiswerk
 
         #endregion
 
-        private static Race _currentRace;
-        private static Directions _currentDirection;
-
+        #endregion
         public static void Initialize(Race race)
         {
             _currentRace = race;
@@ -90,7 +92,7 @@ namespace RaceOpdrachtHuiswerk
             {
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
-                Console.WriteLine($"Track: {_currentRace.Track.Name}");
+                Console.Title = $"Track: {_currentRace.Track.Name}";
             }
         }
 
