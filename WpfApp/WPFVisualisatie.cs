@@ -76,114 +76,115 @@ namespace WpfApp
             posRight = _xpos + 100;
 
             Bitmap trackImage = PlaceSections(track, emptyImage);
-            //Bitmap participantImage = DrawDriverOnTrack(track, trackImage);
             return createImage.CreateBitmapSourceFromGdiBitmap(trackImage);
-
-            //return Images.CreateBitmapSourceFromGdiBitmap(Images.CreateBitmap(1920,1080));
         }
 
-        public static Bitmap PlaceSections(Track track, Bitmap bitmap)
+        public static Bitmap PlaceSections(Track t, Bitmap bitmap)
         {
-            int startpositieX = 25;
-            int startpositieY = 5;
+            int x = _xpos;
+            int y = _ypos;
 
-            var it = track.Sections.First;
             Graphics graphics = Graphics.FromImage(bitmap);
-
-            while (it != null)
+            foreach (Section section in t.Sections)
             {
-                string? symbool = getSymbol(it.Value, _direction);
-                it = it.Next;
+                SectionData sd = Data.CurrentRace.GetSectionData(section);
 
-                if (symbool == null)
+                switch (section.SectionType) //switchcase which section to draw
                 {
-                    continue;
-                }
-                else
-                {
-                    DrawDefaults(graphics, createImage.GetImageOutOfFolder(symbool),startpositieX, startpositieY, _direction);
-
-                    if (it == null)
-                    {
+                    case SectionTypes.StartGrid:
+                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_startHorizontal), x, y, _direction);
+                        if (sd.Left is not null)
+                        {
+                            IParticipant participant = sd.Left;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        if (sd.Right is not null)
+                        {
+                            IParticipant participant = sd.Right;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
                         break;
-                    }
 
-                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
-                    {
-                        switch (_direction)
+                    case SectionTypes.Straight:
+                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_straightHorizontal), x, y, _direction);
+                        if (sd.Left is not null)
                         {
-                            case Direction.North:
-                                {
-                                    _direction = Direction.East;
-                                }
-                                break;
-                            case Direction.East:
-                                {
-                                    _direction = Direction.South;
-                                }
-                                break;
-                            case Direction.South:
-                                {
-                                    _direction = Direction.West;
-                                }
-                                break;
-                            case Direction.West:
-                                {
-                                    _direction = Direction.North;
-                                }
-                                break;
+                            IParticipant participant = sd.Left;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
                         }
-                    }
+                        if (sd.Right is not null)
+                        {
+                            IParticipant participant = sd.Right;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        break;
 
-                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.LeftCorner)
-                    {
-                        switch (_direction)
+                    case SectionTypes.Finish:
+                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_finishHorizontal), x, y, _direction);
+                        if (sd.Left != null)
                         {
-                            case Direction.North:
-                                {
-                                    _direction = Direction.West;
-                                }
-                                break;
-                            case Direction.East:
-                                {
-                                    _direction = Direction.North;
-                                }
-                                break;
-                            case Direction.South:
-                                {
-                                    _direction = Direction.East;
-                                }
-                                break;
-                            case Direction.West:
-                                {
-                                    _direction = Direction.South;
-                                }
-                                break;
+                            IParticipant participant = sd.Left;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
                         }
-                    }
-                    string? volgendeSymbool = getSymbol(it.Value, _direction);
-                    if (volgendeSymbool != null)
-                    {
-                        switch (_direction)
+                        if (sd.Right != null)
                         {
-                            case Direction.North:
-                                startpositieY -= volgendeSymbool.Length;
-                                break;
-                            case Direction.South:
-                                startpositieY += symbool.Length;
-                                break;
-                            case Direction.East:
-                                startpositieX += symbool.Length;
-                                break;
-                            case Direction.West:
-                                startpositieX -= volgendeSymbool.Length;
-                                break;
+                            IParticipant participant = sd.Right;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
                         }
-                    }
-                    _direction = Direction.North;
-                    return bitmap;
+                        break;
+
+                    case SectionTypes.LeftCorner:
+                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_leftUp), x, y, _direction);
+                        CalculateDirection(SectionTypes.LeftCorner);
+                        if (sd.Left != null)
+                        {
+                            IParticipant participant = sd.Left;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        if (sd.Right != null)
+                        {
+                            IParticipant participant = sd.Right;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        break;
+
+                    case SectionTypes.RightCorner:
+                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_rightDown), x, y, _direction);
+                        CalculateDirection(SectionTypes.RightCorner);
+                        if (sd.Left != null)
+                        {
+                            IParticipant participant = sd.Left;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        if (sd.Right != null)
+                        {
+                            IParticipant participant = sd.Right;
+                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                        }
+                        break;
+
                 }
+                switch (_direction)
+                {
+                    case Direction.North:
+                        y = y - _size;
+                        break;
+                    case Direction.East:
+                        x = x + _size;
+                        _xpos = x;
+                        break;
+                    case Direction.South:
+                        y = y + _size;
+                        break;
+                    case Direction.West:
+                        x = x - _size;
+                        _xpos = x;
+                        break;
+                } // calculate xpos ypos
+
             }
+            _direction = Direction.East;
+            return bitmap;
         }
 
         private static string GetDriverImage(IParticipant driver)
@@ -301,79 +302,184 @@ namespace WpfApp
             }
         }
 
-        public static string getSymbol(Section section, Direction HuidigeDirection)
+        #region Eigen methodes
+        /*        public static string getSymbol(Section section, Direction HuidigeDirection)
+                {
+                    switch (section.SectionType)
+                    {
+                        case Section.SectionTypes.RightCorner:
+                            switch (HuidigeDirection)
+                            {
+                                case Direction.South:
+                                    return _leftUp;
+                                case Direction.West:
+                                    return _leftDown;
+                                case Direction.North:
+                                    return _rightUp;
+                                case Direction.East:
+                                    return _rightDown;
+                            }
+                            break;
+                        case Section.SectionTypes.LeftCorner:
+                            switch (HuidigeDirection)
+                            {
+                                case Direction.South:
+                                    return _leftDown;
+                                case Direction.West:
+                                    return _rightUp;
+                                case Direction.North:
+                                    return _rightDown;
+                                case Direction.East:
+                                    return _leftUp;
+                            }
+                            break;
+                        case Section.SectionTypes.Straight:
+                            {
+                                switch (HuidigeDirection)
+                                {
+                                    case Direction.South:
+                                    case Direction.North:
+                                        return _straightVertical;
+                                    case Direction.East:
+                                    case Direction.West:
+                                        return _straightHorizontal;
+                                }
+                                break;
+                            }
+                        case Section.SectionTypes.StartGrid:
+                            {
+                                switch (HuidigeDirection)
+                                {
+                                    case Direction.South:
+                                    case Direction.North:
+                                        return _startVertical;
+                                    case Direction.East:
+                                    case Direction.West:
+                                        return _startHorizontal;
+                                }
+                                break;
+                            }
+                        case Section.SectionTypes.Finish:
+                            {
+                                switch (HuidigeDirection)
+                                {
+                                    case Direction.South:
+                                    case Direction.North:
+                                        return _finishVertical;
+                                    case Direction.East:
+                                    case Direction.West:
+                                        return _finishHorizontal;
+                                }
+                                break;
+                            }
+                    }
+                    return null;
+
+                }*/
+
+/*        public static Bitmap PlaceSections(Track track, Bitmap bitmap)
         {
-            switch (section.SectionType)
+            int startpositieX = 25;
+            int startpositieY = 5;
+
+            var it = track.Sections.First;
+            Graphics graphics = Graphics.FromImage(bitmap);
+
+            while (it != null)
             {
-                case Section.SectionTypes.RightCorner:
-                    switch (HuidigeDirection)
+                string? symbool = getSymbol(it.Value, _direction);
+                it = it.Next;
+
+                if (symbool == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    DrawDefaults(graphics, createImage.GetImageOutOfFolder(symbool), startpositieX, startpositieY, _direction);
+
+                    if (it == null)
                     {
-                        case Direction.South:
-                            return _leftUp;
-                        case Direction.West:
-                            return _leftDown;
-                        case Direction.North:
-                            return _rightUp;
-                        case Direction.East:
-                            return _rightDown;
-                    }
-                    break;
-                case Section.SectionTypes.LeftCorner:
-                    switch (HuidigeDirection)
-                    {
-                        case Direction.South:
-                            return _leftDown;
-                        case Direction.West:
-                            return _rightUp;
-                        case Direction.North:
-                            return _rightDown;
-                        case Direction.East:
-                            return _leftUp;
-                    }
-                    break;
-                case Section.SectionTypes.Straight:
-                    {
-                        switch (HuidigeDirection)
-                        {
-                            case Direction.South:
-                            case Direction.North:
-                                return _straightVertical;
-                            case Direction.East:
-                            case Direction.West:
-                                return _straightHorizontal;
-                        }
                         break;
                     }
-                case Section.SectionTypes.StartGrid:
+
+                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
                     {
-                        switch (HuidigeDirection)
+                        switch (_direction)
                         {
-                            case Direction.South:
                             case Direction.North:
-                                return _startVertical;
+                                {
+                                    _direction = Direction.East;
+                                }
+                                break;
                             case Direction.East:
+                                {
+                                    _direction = Direction.South;
+                                }
+                                break;
+                            case Direction.South:
+                                {
+                                    _direction = Direction.West;
+                                }
+                                break;
                             case Direction.West:
-                                return _startHorizontal;
+                                {
+                                    _direction = Direction.North;
+                                }
+                                break;
                         }
-                        break;
                     }
-                case Section.SectionTypes.Finish:
+
+                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.LeftCorner)
                     {
-                        switch (HuidigeDirection)
+                        switch (_direction)
                         {
-                            case Direction.South:
                             case Direction.North:
-                                return _finishVertical;
+                                {
+                                    _direction = Direction.West;
+                                }
+                                break;
                             case Direction.East:
+                                {
+                                    _direction = Direction.North;
+                                }
+                                break;
+                            case Direction.South:
+                                {
+                                    _direction = Direction.East;
+                                }
+                                break;
                             case Direction.West:
-                                return _finishHorizontal;
+                                {
+                                    _direction = Direction.South;
+                                }
+                                break;
                         }
-                        break;
                     }
+                    string? volgendeSymbool = getSymbol(it.Value, _direction);
+                    if (volgendeSymbool != null)
+                    {
+                        switch (_direction)
+                        {
+                            case Direction.North:
+                                startpositieY -= volgendeSymbool.Length;
+                                break;
+                            case Direction.South:
+                                startpositieY += symbool.Length;
+                                break;
+                            case Direction.East:
+                                startpositieX += symbool.Length;
+                                break;
+                            case Direction.West:
+                                startpositieX -= volgendeSymbool.Length;
+                                break;
+                        }
+                    }
+                    _direction = Direction.North;
+                    return bitmap;
+                }
             }
-            return null;
-
-        }
-
+        }*/
+        #endregion
     }
 }

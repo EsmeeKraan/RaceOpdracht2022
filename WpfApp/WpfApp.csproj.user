@@ -7,6 +7,20 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CurrentCompetitionScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CurrentRaceScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="CurrentCompetitionScreen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CurrentRaceScreen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

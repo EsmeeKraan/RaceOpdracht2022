@@ -400,7 +400,7 @@ namespace Controller
             CheckIfEquipmentsShouldBreakOrBeRepaired();
             MoveParticipant(e.SignalTime);
 
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track } );
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track) { Track = this.Track } );
 
             if (CheckIfFinished())
             {
