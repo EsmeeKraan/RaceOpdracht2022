@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.VisualBasic;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Controller
         public static Race CurrentRace;
 
         public static event EventHandler<NextRaceEventArgs> NextRaceEvent;
+        public static event EventHandler<NextRaceEventArgs> CompetitionEnded;
 
         private static bool _lastRace;
 
@@ -37,13 +39,7 @@ namespace Controller
             }
             else
             {
-                Console.Clear();
-                Console.SetCursorPosition(0, 0);
-                Console.Title = "Competition Over!";
-                foreach (var participant in Competition.Participants)
-                {
-                    Console.WriteLine(participant.Name + " won!");
-                }
+                CompetitionEnded?.Invoke(null, new NextRaceEventArgs() { Race = null });
             }
         }
 
@@ -56,21 +52,21 @@ namespace Controller
 
         public static void addParticipants()
         {
-            Competition.Participants.Add(new Driver("Yoshi", 0));
-            Competition.Participants.Add(new Driver("Mario", 0));
-            Competition.Participants.Add(new Driver("Toad", 0));
-            Competition.Participants.Add(new Driver("Donkey Kong", 0));
-            Competition.Participants.Add(new Driver("Peach", 0));
-            Competition.Participants.Add(new Driver("Waluigi", 0));
-            Competition.Participants.Add(new Driver("Luigi", 0));
-            Competition.Participants.Add(new Driver("Bowser", 0));
+            Competition.Participants.Add(new Driver("Yoshi", 0, IParticipant.TeamColors.Green));
+            Competition.Participants.Add(new Driver("Mario", 0, IParticipant.TeamColors.Red));
+            Competition.Participants.Add(new Driver("Toad", 0, IParticipant.TeamColors.Red));
+            Competition.Participants.Add(new Driver("Donkey Kong", 0, IParticipant.TeamColors.Orange));
+            Competition.Participants.Add(new Driver("Peach", 0, IParticipant.TeamColors.Yellow));
+            Competition.Participants.Add(new Driver("Waluigi", 0, IParticipant.TeamColors.Orange));
+            Competition.Participants.Add(new Driver("Luigi", 0, IParticipant.TeamColors.Green));
+            Competition.Participants.Add(new Driver("Bowser", 0, IParticipant.TeamColors.Grey));
         }
 
         public static void addTracks()
         {
             Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[]
             {
-                Section.SectionTypes.RightCorner,
+                /*Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -108,11 +104,6 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -126,15 +117,6 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -204,6 +186,86 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,*/
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.StartGrid,
+                Section.SectionTypes.StartGrid,
+                Section.SectionTypes.StartGrid,
+                Section.SectionTypes.StartGrid,
+                Section.SectionTypes.Finish,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,

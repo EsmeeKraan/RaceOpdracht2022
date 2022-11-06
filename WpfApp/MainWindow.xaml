@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FF1C5B2E">
-        <Image x:Name="TrackImage" Margin="205,0,159,23" Height="385" VerticalAlignment="Bottom">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
+                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" HorizontalAlignment="Center">
+                    <MenuItem x:Name="Current_Race" Click="MenuItem_Open_CurrentRaceScreen" Header="Current Race"/>
+                    <MenuItem x:Name="Current_Competition" Click="MenuItem_Open_CurrentCompetitionScreen" Header="Current Competition"/>
+                    <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Image x:Name="TrackImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
         </Image>
     </Grid>

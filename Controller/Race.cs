@@ -93,7 +93,7 @@ namespace Controller
             _lapsDriven = new Dictionary<IParticipant, int>();
             foreach(IParticipant participant in Participants)
             {
-                _lapsDriven.Add(participant, 1);
+                _lapsDriven.Add(participant, -1);
             }
         }
 
@@ -379,9 +379,6 @@ namespace Controller
                 if (!ParticipantFinished(participant))
                     return false;
                 _finishOrder.Add(participant);
-
-                Console.Title = $"{participant.Name} just finished!! :)";
-
                 if (side == Side.Left)
                     sectiondata.Left = null;
                 else

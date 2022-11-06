@@ -34,11 +34,11 @@ namespace WpfApp
 
         public void MainWindowInitialize()
         {
+            InitializeComponent();
             Data.Initialize();
             Data.NextRaceEvent += OnNextRaceEvent; // <--- geen delegate maar een event
+            Data.NextRace();
             Data.CurrentRace.DriversChanged += OnDriversChanged;
-
-            InitializeComponent();
         }
 
         public void OnNextRaceEvent(object? sender, NextRaceEventArgs e)
@@ -46,7 +46,8 @@ namespace WpfApp
             //Geen Intialize die wel in VisualisatieStatic
             //Hoe implementeer ik mijn events
             //RaceChanged een delegated van maken???
-            createImage.ClearImageDictionary();
+            /*createImage.ClearImageDictionary();*/
+            // COMMENT DIT WEER UIT!!!!!!!!!!!!!!! :OOOO
             Data.CurrentRace.DriversChanged += OnDriversChanged;
         }
 
@@ -69,6 +70,12 @@ namespace WpfApp
         private void MenuItem_Open_CurrentCompetitionScreen(object sender, RoutedEventArgs e)
         {
             _currentCompetitionScreen.Show();
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            Application.Current.Shutdown();
         }
     }
 }

@@ -57,100 +57,117 @@ namespace WpfApp
         private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
         #endregion
 
-        private const int _size = 128;
-        private static int _xpos;
-        private static int _ypos;
-        private static int posLeft;
-        private static int posRight;
-
+        private const int _size = 32;
+        private const float _factor = 0.15f;
         private static Direction _direction { get; set; }
         private static Race? _currentRace { get; set; }
         public static BitmapSource DrawTrack(Track track)
         {
-
-            Bitmap emptyImage = createImage.CreateBitmap(1920, 1080);
-
-            _xpos = (7 * _size);
-            _ypos = 20;
-            posLeft = _xpos + 50;
-            posRight = _xpos + 100;
-
-            Bitmap trackImage = PlaceSections(track, emptyImage);
+            Bitmap emptyImage = createImage.CreateBitmap(1500, 1200, track);
+            Bitmap trackImage = PlaceSections(track, emptyImage, true);
             return createImage.CreateBitmapSourceFromGdiBitmap(trackImage);
         }
 
-        public static Bitmap PlaceSections(Track t, Bitmap bitmap)
+        public static Bitmap PlaceSections(Track t, Bitmap bitmap, bool drawParticipants)
         {
-            int x = _xpos;
-            int y = _ypos;
+            
+            float x = 32;
+            float y = bitmap.Height * 0.1f;
 
             Graphics graphics = Graphics.FromImage(bitmap);
             foreach (Section section in t.Sections)
             {
                 SectionData sd = Data.CurrentRace.GetSectionData(section);
+                Bitmap bd = null;
 
                 switch (section.SectionType) //switchcase which section to draw
                 {
                     case SectionTypes.StartGrid:
-                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_startHorizontal), x, y, _direction);
-                        if (sd.Left is not null)
+                        bd = createImage.GetImageOutOfFolder(_startHorizontal);
+                        if (!drawParticipants)
                         {
-                            IParticipant participant = sd.Left;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
-                        }
-                        if (sd.Right is not null)
-                        {
-                            IParticipant participant = sd.Right;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                            DrawDefaults(graphics, bd, x, y, _direction);
                         }
                         break;
 
                     case SectionTypes.Straight:
-                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_straightHorizontal), x, y, _direction);
-                        if (sd.Left is not null)
+                        bd = createImage.GetImageOutOfFolder(_straightHorizontal);
+                        if (!drawParticipants)
                         {
-                            IParticipant participant = sd.Left;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
-                        }
-                        if (sd.Right is not null)
-                        {
-                            IParticipant participant = sd.Right;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                            DrawDefaults(graphics, bd, x, y, _direction);
                         }
                         break;
 
                     case SectionTypes.Finish:
-                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_finishHorizontal), x, y, _direction);
-                        if (sd.Left != null)
+                        bd = createImage.GetImageOutOfFolder(_finishHorizontal);
+                        if (!drawParticipants)
                         {
-                            IParticipant participant = sd.Left;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
-                        }
-                        if (sd.Right != null)
-                        {
-                            IParticipant participant = sd.Right;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
+                            DrawDefaults(graphics, bd, x, y, _direction);
                         }
                         break;
 
                     case SectionTypes.LeftCorner:
-                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_leftUp), x, y, _direction);
+                        bd = createImage.GetImageOutOfFolder(_leftUp);
+                        switch (_direction)
+                        {
+                            case Direction.East: 
+                                y -= 98 * _factor;
+                                break;
+                            case Direction.North:
+                                x -= 85 * _factor;
+                                break;
+                        }
+                        if (!drawParticipants)
+                        {
+                            DrawDefaults(graphics, bd, x, y, _direction);
+                        }
+                        switch (_direction)
+                        {
+                            case Direction.South:
+                                y += 98 * _factor;
+                                break;
+                            case Direction.East:
+                                x += 85 * _factor;
+                                y += 98 * _factor;
+                                break;
+                            case Direction.North:
+                                x += 85 * _factor;
+                                break;
+                        }
                         CalculateDirection(SectionTypes.LeftCorner);
-                        if (sd.Left != null)
-                        {
-                            IParticipant participant = sd.Left;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
-                        }
-                        if (sd.Right != null)
-                        {
-                            IParticipant participant = sd.Right;
-                            DrawDriver(graphics, participant, sd, x, y, _direction);
-                        }
                         break;
 
                     case SectionTypes.RightCorner:
-                        DrawDefaults(graphics, createImage.GetImageOutOfFolder(_rightDown), x, y, _direction);
+                        bd = createImage.GetImageOutOfFolder(_rightDown);
+                        switch (_direction)
+                        {
+                            case Direction.South:
+                                x -= 85 * _factor;
+                                break;
+                            case Direction.West:
+                                y -= 98 * _factor;
+                                break;
+                        }
+                        if (!drawParticipants)
+                        {
+                            DrawDefaults(graphics, bd, x, y, _direction);
+                        }
+                        switch (_direction)
+                        {
+                            case Direction.East:
+                                x += 85 * _factor;
+                                break;
+                            case Direction.South:
+                                x += 85 * _factor;
+                                y += 98 * _factor;
+                                break;
+                            case Direction.West:
+                                y += 98 * _factor;
+                                break;
+
+                        }
                         CalculateDirection(SectionTypes.RightCorner);
+
                         if (sd.Left != null)
                         {
                             IParticipant participant = sd.Left;
@@ -161,29 +178,41 @@ namespace WpfApp
                             IParticipant participant = sd.Right;
                             DrawDriver(graphics, participant, sd, x, y, _direction);
                         }
+                        
                         break;
 
+                }
+                if (drawParticipants)
+                {
+                    if (sd.Left is not null)
+                    {
+                        IParticipant participant = sd.Left;
+                        DrawDriver(graphics, participant, sd, x, y, _direction);
+                    }
+                    if (sd.Right is not null)
+                    {
+                        IParticipant participant = sd.Right;
+                        DrawDriver(graphics, participant, sd, x, y, _direction);
+                    }
                 }
                 switch (_direction)
                 {
                     case Direction.North:
-                        y = y - _size;
+                        y = y - bd.Height * _factor;
                         break;
                     case Direction.East:
-                        x = x + _size;
-                        _xpos = x;
+                        x = x + bd.Width * _factor;
                         break;
                     case Direction.South:
-                        y = y + _size;
+                        y = y + bd.Height * _factor;
                         break;
                     case Direction.West:
-                        x = x - _size;
-                        _xpos = x;
+                        x = x - bd.Width * _factor;
                         break;
                 } // calculate xpos ypos
 
             }
-            _direction = Direction.East;
+            _direction = Direction.North;
             return bitmap;
         }
 
@@ -208,15 +237,15 @@ namespace WpfApp
             }
         }
 
-        private static int XCorrection(int x, Direction direction, string side)
+        private static float XCorrection(float x, Direction direction, string side)
         {
             if (side.Equals("left"))
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    x = x + 10;
+                    x = x + 10 * _factor;
                 }
-                else x = x + 80;
+                else x = x + 80 * _factor;
             }
             if (side.Equals("right"))
             {
@@ -224,33 +253,33 @@ namespace WpfApp
                 {
                     //x stays x
                 }
-                else x = x + 10;
+                else x = x + 10 * _factor;
             }
             return x;
         }
 
-        private static int YCorrection(int y, Direction direction, string side)
+        private static float YCorrection(float y, Direction direction, string side)
         {
             if (side.Equals("left"))
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    y = y + 10;
+                    y = y + 10 * _factor;
                 }
-                else y = y + 50;
+                else y = y + 50 * _factor;
             }
             if (side.Equals("right"))
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    y = y + 60;
+                    y = y + 60 * _factor;
                 }
-                else y = y + 20;
+                else y = y + 20 * _factor;
             }
             return y;
         }
 
-        private static void DrawDriver(Graphics g, IParticipant p, SectionData sd, int x, int y, Direction direction)
+        private static void DrawDriver(Graphics g, IParticipant p, SectionData sd, float x, float y, Direction direction)
         {
             if (p == sd.Left)
             {
@@ -262,25 +291,25 @@ namespace WpfApp
             }
         }
 
-        private static void DrawDefaults(Graphics g, Bitmap bitmap, int x, int y, Direction r)
+        private static void DrawDefaults(Graphics g, Bitmap bitmap, float x, float y, Direction r)
         {
             Bitmap bitm = new Bitmap(bitmap);
             switch (r)
             {
                 case Direction.North:
                     bitm.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    g.DrawImage(bitm, new Point(x, y));
+                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
                     break;
                 case Direction.East:
-                    g.DrawImage(bitm, new Point(x, y));
+                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
                     break;
                 case Direction.South:
                     bitm.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    g.DrawImage(bitm, new Point(x, y));
+                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
                     break;
                 case Direction.West:
                     bitm.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    g.DrawImage(bitm, new Point(x, y));
+                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
                     break;
             }
         }
