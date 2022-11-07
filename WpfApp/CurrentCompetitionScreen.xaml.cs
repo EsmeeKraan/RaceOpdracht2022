@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfApp
 {
@@ -22,6 +23,10 @@ namespace WpfApp
         public CurrentCompetitionScreen()
         {
             InitializeComponent();
+            ((MainWindowDataContext)DataContext).Dispatcher = (action =>
+            {
+                Dispatcher.BeginInvoke(action, DispatcherPriority.Normal);
+            });
         }
     }
 }

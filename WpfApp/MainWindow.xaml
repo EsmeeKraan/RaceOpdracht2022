@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowDataContext/>
+    </Window.DataContext>
     <Grid Background="#FF1C5B2E">
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
@@ -15,6 +18,9 @@
                     <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>
+            <Label Content="{Binding TrackName}"/>
+
+
         </DockPanel>
         <Image x:Name="TrackImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 

@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         Title="CurrentCompetitionScreen" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.DataContext>
+        <local:MainWindowDataContext/>
+    </Window.DataContext>
+    <StackPanel>
+        <Label Content="{Binding CompetitionName}"/>
+        <ListView ItemsSource="{Binding CompetitionPoints}"/>
+
+    </StackPanel>
 </Window>

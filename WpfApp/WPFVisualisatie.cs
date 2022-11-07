@@ -25,7 +25,7 @@ namespace WpfApp
     static class WPFVisualisatie
     {
         #region Graphics
-        private const string _startHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
+        /*private const string _startHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
         private const string _startVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\startGridVertical.png";
 
         private const string _finishHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\finishHorizontal.png";
@@ -54,11 +54,38 @@ namespace WpfApp
         private const string _carGreyBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
 
         private const string _carGreen = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
-        private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
+        private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";*/
+        #endregion
+
+        #region LaptopGraphics
+        private const string _startHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
+        private const string _finishHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishHorizontal.png";
+
+        private const string _straightHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightHorizontal.png";
+        private const string _leftUp = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftUp.png";
+        private const string _rightDown = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightDown.png";
+
+        private const string _carBlue = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
+        private const string _carBlueBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
+
+        private const string _carOrange = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
+        private const string _carOrangeBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
+
+        private const string _carYellow = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
+        private const string _carYellowBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
+
+        private const string _carRed = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
+        private const string _carRedBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
+
+        private const string _carGrey = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
+        private const string _carGreyBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
+
+        private const string _carGreen = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
+        private const string _carGreenBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
         #endregion
 
         private const int _size = 32;
-        private const float _factor = 0.15f;
+        private const float _factor = 0.2f;
         private static Direction _direction { get; set; }
         private static Race? _currentRace { get; set; }
         public static BitmapSource DrawTrack(Track track)
@@ -72,7 +99,7 @@ namespace WpfApp
         {
             
             float x = 32;
-            float y = bitmap.Height * 0.1f;
+            float y = bitmap.Height * 0.14f;
 
             Graphics graphics = Graphics.FromImage(bitmap);
             foreach (Section section in t.Sections)

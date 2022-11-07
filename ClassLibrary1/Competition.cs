@@ -11,6 +11,7 @@ namespace Model
         #region Properties
         public List<IParticipant> Participants = new();
         public Queue<Track> Tracks = new();
+        public string Name;
         #endregion
 
         #region Methodes
@@ -20,6 +21,11 @@ namespace Model
                 return null;
             }
             return Tracks.Dequeue();
+        }
+
+        public Competition(string name)
+        {
+            Name = name;
         }
         #endregion
     }

@@ -10,9 +10,10 @@ namespace Model
     {
         #region Properties
         string Name { get; }
-        int Points { get; }
+        int Points { get; set;  }
         IEquipment Equipment { get; set;  }
         TeamColors TeamColor { get; }
+
         #endregion
 
         #region Enums

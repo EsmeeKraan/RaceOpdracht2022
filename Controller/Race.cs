@@ -32,7 +32,7 @@ namespace Controller
         private const int _laps = 3;
         private Dictionary<IParticipant, int> _lapsDriven = new();
 
-        private Dictionary<IParticipant, DateTime> _ParticipantLapTime = new();
+        public Dictionary<IParticipant, DateTime> ParticipantLapTime = new();
 
         private List<IParticipant> _finishOrder = new();
 
@@ -98,19 +98,6 @@ namespace Controller
         }
 
         /// <summary>
-        /// Initialises a counter for tracking the lap time for each participant
-        /// Used for keeping track of the lapTime
-        /// </summary>
-        public void initializeStartLapTime()
-        {
-            _lapsDriven = new Dictionary<IParticipant, int>();
-
-            foreach(IParticipant participant in Participants)
-            {
-                /*_lapsDriven.Add(participant, StartTime);*/
-            }
-        }
-        /// <summary>
         /// Updates a counter each participant has & tracks the lapTime
         /// Used for updating _lapsDriven and keeping track of _ParticipantLapTime 
         /// </summary>
@@ -119,9 +106,8 @@ namespace Controller
         public void UpdateLap(IParticipant participant, DateTime time)
         {
             _lapsDriven[participant]++;
-            /*Console.Title = $"{participant.Name} just got to lap {_lapsDriven[participant]}";*/
-            if (_lapsDriven[participant] <= 1) return;
-            _ParticipantLapTime[participant] = time;
+            if (!ParticipantFinished(participant)) return;
+            ParticipantLapTime[participant] = time;
         }
 
         /// <summary>
@@ -159,8 +145,6 @@ namespace Controller
         /// <param name="node"></param>
         public void MoveSectionData(Section currentSection, Section nextSection, DateTime time, LinkedListNode<Section> node)
         {
-            //_timer.Stop();
-
                 SectionData currentSectionData = GetSectionData(currentSection);
                 SectionData nextSectionData = GetSectionData(nextSection);
 
@@ -299,12 +283,6 @@ namespace Controller
             if (distance < 100)
                 return null;
 
-            if (currentSectionType == Section.SectionTypes.Finish)
-            {
-                if (UpdateLapAndFinish(currentSectionData, (Side)side, time))
-                    return null;
-            }
-
             Side? nextSide;
             if (side == Side.Left)
             {
@@ -327,6 +305,12 @@ namespace Controller
                 currentSectionData.Left = null;
             else
                 currentSectionData.Right = null;
+
+            if (currentSectionType == Section.SectionTypes.Finish)
+            {
+                if (UpdateLapAndFinish(nextSectionData, (Side)nextSide, time))
+                    return null;
+            }
 
             return nextSide;
         }
@@ -391,21 +375,48 @@ namespace Controller
 
         public int GetSpeedFromCompetitor(IParticipant iParticipant) => Convert.ToInt32(Math.Ceiling(0.12 * (iParticipant.Equipment.Speed * 0.51) * iParticipant.Equipment.Performance + 15));
 
+
+
         #region Events
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
             CheckIfEquipmentsShouldBreakOrBeRepaired();
-            MoveParticipant(e.SignalTime);
+            MoveParticipant(DateTime.Now);
 
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track) { Track = this.Track } );
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track) { Track = this.Track });
 
             if (CheckIfFinished())
             {
+                for(int i = 0; i < _finishOrder.Count; i++)
+                {
+                    int points = 0;
+                    switch (i)
+                    {
+                        case 0: points = 15; 
+                            break;
+                        case 1: points = 12;
+                            break;
+                        case 2: points = 10;
+                            break;
+                        case 3: points = 8;
+                            break;
+                        case 4: points = 7;
+                            break;
+                        case 5: points = 5;
+                            break;
+                        case 6: points = 3;
+                            break;
+                        case 7: points = 1;
+                            break;
+                    }
+                    _finishOrder[i].Points += points;
+                }
                 _timer.Stop();
                 EndTime = e.SignalTime;
                 IsOver = true;
                 RaceFinished?.Invoke(this, new EventArgs());
             }
+            
         }
         #endregion
 
@@ -436,7 +447,7 @@ namespace Controller
         public SectionData GetSectionData(Section section)
         {
 
-            if (!_positions.ContainsKey(section)) _positions.Add(section, new SectionData());
+            if (!_positions.ContainsKey(section)) _positions.TryAdd(section, new SectionData());
             return _positions[section];
         }
             

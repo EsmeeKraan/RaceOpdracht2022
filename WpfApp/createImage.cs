@@ -39,7 +39,7 @@ namespace WpfApp
         public static Bitmap CreateBitmap(int x, int y, Track track)
         {
             Bitmap returnBitmap;
-            string key = "empty";
+            string key = "empty" + track.Name;
             if (_imageDictionary.ContainsKey(key))
             {
                 return (Bitmap)GetImageOutOfFolder(key).Clone();
