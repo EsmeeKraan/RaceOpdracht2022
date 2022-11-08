@@ -55,7 +55,7 @@ namespace Controller
             Competition.Participants.Add(new Driver("Donkey Kong", 0, IParticipant.TeamColors.Orange));
             Competition.Participants.Add(new Driver("Waluigi", 0, IParticipant.TeamColors.Blue));
             Competition.Participants.Add(new Driver("Bowser", 0, IParticipant.TeamColors.Grey));
-            Competition.Participants.Add(new Driver("Daisy", 0, IParticipant.TeamColors.Yellow));
+            Competition.Participants.Add(new Driver("Toad", 0, IParticipant.TeamColors.Yellow));
         }
 
         /// <summary>

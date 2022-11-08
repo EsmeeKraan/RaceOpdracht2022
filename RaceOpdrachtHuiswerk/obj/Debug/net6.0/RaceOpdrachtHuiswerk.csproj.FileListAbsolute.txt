@@ -41,12 +41,6 @@ C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_So
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\obj\Debug\net6.0\ref\RaceOpdrachtHuiswerk.dll
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.dll
 C:\Users\esmee\OneDrive\Bureaublad\School Jaar 2\C#\Code\RaceOpdrachtHuiswerk_Solution\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.pdb
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.deps.json
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.runtimeconfig.json
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\appsettings.json
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.staticwebassets.runtime.json
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.exe
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.exe
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.deps.json
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.runtimeconfig.json
@@ -54,10 +48,8 @@ C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\RaceOpdrachtHuiswerk.pdb
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.dll
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Model.dll
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.dll
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Model.pdb
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\Controller.pdb
-C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\bin\Debug\net6.0\WebApplication1.pdb
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.csproj.AssemblyReference.cache
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\MSI\Source\Repos\RaceOpdracht2022\RaceOpdrachtHuiswerk\obj\Debug\net6.0\RaceOpdrachtHuiswerk.AssemblyInfoInputs.cache

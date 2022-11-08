@@ -9,8 +9,7 @@
       "RaceOpdrachtHuiswerk/1.0.0": {
         "dependencies": {
           "Controller": "1.0.0",
-          "Model": "1.0.0",
-          "WebApplication1": "1.0.0"
+          "Model": "1.0.0"
         },
         "runtime": {
           "RaceOpdrachtHuiswerk.dll": {}
@@ -28,11 +27,6 @@
         "runtime": {
           "Model.dll": {}
         }
-      },
-      "WebApplication1/1.0.0": {
-        "runtime": {
-          "WebApplication1.dll": {}
-        }
       }
     }
   },
@@ -48,11 +42,6 @@
       "sha512": ""
     },
     "Model/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "WebApplication1/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

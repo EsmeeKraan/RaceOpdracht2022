@@ -24,19 +24,6 @@
         "runtime": {
           "bin/placeholder/Model.dll": {}
         }
-      },
-      "WebApplication1/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/WebApplication1.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/WebApplication1.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       }
     }
   },
@@ -50,18 +37,12 @@
       "type": "project",
       "path": "../ClassLibrary1/Model.csproj",
       "msbuildProject": "../ClassLibrary1/Model.csproj"
-    },
-    "WebApplication1/1.0.0": {
-      "type": "project",
-      "path": "../WebApplication1/WebApplication1.csproj",
-      "msbuildProject": "../WebApplication1/WebApplication1.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Controller >= 1.0.0",
-      "Model >= 1.0.0",
-      "WebApplication1 >= 1.0.0"
+      "Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -96,9 +77,6 @@
             },
             "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\Controller\\Controller.csproj": {
               "projectPath": "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\Controller\\Controller.csproj"
-            },
-            "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj": {
-              "projectPath": "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WebApplication1\\WebApplication1.csproj"
             }
           }
         }

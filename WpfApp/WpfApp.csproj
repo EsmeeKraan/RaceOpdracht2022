@@ -19,28 +19,86 @@
     <None Remove="TypeSection\straightHorizontal.png" />
     <None Remove="TypeSection\straightVertical.png" />
     <None Remove="TypeSection\teamcolor_BLUE.png" />
+    <None Remove="TypeSection\teamcolor_BLUE_BROKEN.png" />
     <None Remove="TypeSection\teamcolor_GRAY.png" />
+    <None Remove="TypeSection\teamcolor_GRAY_BROKEN.png" />
     <None Remove="TypeSection\teamcolor_GREEN.png" />
+    <None Remove="TypeSection\teamcolor_GREEN_BROKEN.png" />
+    <None Remove="TypeSection\teamcolor_ORANGE.png" />
+    <None Remove="TypeSection\teamcolor_ORANGE_BROKEN.png" />
     <None Remove="TypeSection\teamcolor_RED.png" />
+    <None Remove="TypeSection\teamcolor_RED_BROKEN.png" />
     <None Remove="TypeSection\teamcolor_YELLOW.png" />
+    <None Remove="TypeSection\teamcolor_YELLOW_BROKEN.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="TypeSection\finishHorizontal.png" />
-    <Content Include="TypeSection\finishVertical.png" />
-    <Content Include="TypeSection\leftDown.png" />
-    <Content Include="TypeSection\leftUp.png" />
-    <Content Include="TypeSection\rightDown.png" />
-    <Content Include="TypeSection\rightUp.png" />
-    <Content Include="TypeSection\startGridHorizontal.png" />
-    <Content Include="TypeSection\startGridVertical.png" />
-    <Content Include="TypeSection\straightHorizontal.png" />
-    <Content Include="TypeSection\straightVertical.png" />
-    <Content Include="TypeSection\teamcolor_BLUE.png" />
-    <Content Include="TypeSection\teamcolor_GRAY.png" />
-    <Content Include="TypeSection\teamcolor_GREEN.png" />
-    <Content Include="TypeSection\teamcolor_RED.png" />
-    <Content Include="TypeSection\teamcolor_YELLOW.png" />
+    <Content Include="TypeSection\finishHorizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\finishVertical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\leftDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\leftUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\rightDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\rightUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\startGridHorizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\startGridVertical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\straightHorizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\straightVertical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_BLUE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_BLUE_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_GRAY.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_GRAY_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_GREEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_GREEN_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_ORANGE.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_ORANGE_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_RED.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_RED_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_YELLOW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TypeSection\teamcolor_YELLOW_BROKEN.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

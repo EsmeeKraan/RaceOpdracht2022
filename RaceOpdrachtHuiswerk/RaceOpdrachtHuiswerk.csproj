@@ -10,7 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
     <ProjectReference Include="..\Controller\Controller.csproj" />
-    <ProjectReference Include="..\WebApplication1\WebApplication1.csproj" />
   </ItemGroup>
 
 </Project>

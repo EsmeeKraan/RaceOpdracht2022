@@ -5,12 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Controller;
 using Model;
+using static Model.IParticipant;
+using static Model.Section;
 
 namespace ControllerTest
 {
     [TestFixture]
     public class Controller_Race
     {
+        private Race _testRace { get; set; }
+        private Track _track { get; set; }
+        private List<IParticipant> _participants { get; set; }
+
         [SetUp]
         public void SetUp()
         {
@@ -26,14 +32,77 @@ namespace ControllerTest
         }
 
         [Test]
+        public void CheckIfCompetitionExists()
+        {
+            Data.Initialize();
+            var result = Data.Competition;
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void CheckIfParticipantsAdded()
+        {
+            Data.Initialize();
+            var result = Data.CurrentRace.Participants;
+            Assert.IsNotNull(result);
+        }
+
+        public void CheckIfTracksAdded()
+        {
+            Data.Initialize();
+            var result = Data.CurrentRace.Track;
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void CheckForAtleast6Participants()
+        {
+            _track = new Track("TestTrack", new Section.SectionTypes[] { Section.SectionTypes.Straight });
+            _participants = new List<IParticipant>();
+
+            _participants.Add(new Driver("Fake Mario", 0, TeamColors.Blue));
+            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Yellow));
+            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Grey));
+            _participants.Add(new Driver("Fake Waluigi", 0, TeamColors.Orange));
+            _participants.Add(new Driver("Fake Wario", 0, TeamColors.Red));
+            _participants.Add(new Driver("Fake Yoshi", 0, TeamColors.Green));
+            _participants.Add(new Driver("Fake Toad", 0, TeamColors.Red));
+
+            _testRace = new Race(_track, _participants);
+            _testRace.SetDriverStartPosition(_track, _participants);
+
+
+            Assert.That(_participants.Count, Is.GreaterThanOrEqualTo(6));
+        }
+
+        [Test]
+        public void CheckIfLessThan6Participants()
+        {
+
+            _track = new Track("TestTrack", new Section.SectionTypes[] { Section.SectionTypes.Straight });
+            _participants = new List<IParticipant>();
+
+            _participants.Add(new Driver("Fake Mario", 0, TeamColors.Blue));
+            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Yellow));
+            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Grey));
+            _participants.Add(new Driver("Fake Waluigi", 0, TeamColors.Orange));
+            _participants.Add(new Driver("Fake Wario", 0, TeamColors.Red));
+
+            _testRace = new Race(_track, _participants);
+            _testRace.SetDriverStartPosition(_track, _participants);
+
+            Assert.That(_participants.Count, Is.LessThanOrEqualTo(6));
+        }
+
+        [Test]
         public void TestParticipantFinished()
         {
             bool Finished = false;
 
-            Data.CurrentRace.RaceFinished += (_,_) =>
+            Data.CurrentRace.RaceFinished += (_, _) =>
             {
                 Finished = true;
-                foreach(IParticipant participant in Data.CurrentRace.Participants)
+                foreach (IParticipant participant in Data.CurrentRace.Participants)
                 {
                     Assert.That(participant.Points, Is.Not.Zero);
                 }
@@ -102,5 +171,19 @@ namespace ControllerTest
             }
         }
 
+        [Test]
+        public void GetSectionData_ReturnsData()
+        {
+            _track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCorner, SectionTypes.RightCorner, SectionTypes.Finish });
+            _participants = new List<IParticipant>();
+            _participants.Add(new Driver("Fake Yoshi", 0,TeamColors.Blue));
+            _testRace = new Race(_track, _participants);
+
+            foreach (var section in Data.CurrentRace.Track.Sections)
+            {
+                var SectionData = Data.CurrentRace.GetSectionData(section);
+                Assert.NotNull(SectionData);
+            }
+        }
     }
 }
