@@ -1,12 +1,6 @@
 ﻿using Controller;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static Model.IParticipant;
 using static Model.Section;
@@ -17,89 +11,93 @@ namespace WpfApp
 
     public enum Direction
     {
-        North, 
-        East, 
-        South, 
+        North,
+        East,
+        South,
         West
     }
     static class WPFVisualisatie
     {
         #region Graphics
-        /*private const string _startHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
-        private const string _startVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\startGridVertical.png";
+        private const string _startHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
+        private const string _startVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridVertical.png";
 
-        private const string _finishHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\finishHorizontal.png";
-        private const string _finishVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\finishVertical.png";
+        private const string _finishHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishHorizontal.png";
+        private const string _finishVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishVertical.png";
 
-        private const string _straightHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\straightHorizontal.png";
-        private const string _straightVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\straightVertical.png";
-        private const string _rightUp = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\rightUp.png";
-        private const string _leftUp = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\leftUp.png";
-        private const string _rightDown = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\rightDown.png";
-        private const string _leftDown = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\leftDown.png";
+        private const string _straightHorizontal = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightHorizontal.png";
+        private const string _straightVertical = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightVertical.png";
+        private const string _rightUp = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightUp.png";
+        private const string _leftUp = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftUp.png";
+        private const string _rightDown = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightDown.png";
+        private const string _leftDown = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftDown.png";
 
-        private const string _carBlue = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
-        private const string _carBlueBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
+        private const string _carBlue = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
+        private const string _carBlueBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
 
-        private const string _carOrange = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
-        private const string _carOrangeBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
+        private const string _carOrange = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
+        private const string _carOrangeBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
 
-        private const string _carYellow = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
-        private const string _carYellowBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
+        private const string _carYellow = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
+        private const string _carYellowBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
 
-        private const string _carRed = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
-        private const string _carRedBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
+        private const string _carRed = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
+        private const string _carRedBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
 
-        private const string _carGrey = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
-        private const string _carGreyBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
+        private const string _carGrey = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
+        private const string _carGreyBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
 
-        private const string _carGreen = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
-        private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdrachtRecent2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";*/
+        private const string _carGreen = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
+        private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
         #endregion
 
         #region LaptopGraphics
-        private const string _startHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
-        private const string _finishHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishHorizontal.png";
+        /*        private const string _startHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
+                private const string _finishHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishHorizontal.png";
 
-        private const string _straightHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightHorizontal.png";
-        private const string _leftUp = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftUp.png";
-        private const string _rightDown = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightDown.png";
+                private const string _straightHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightHorizontal.png";
+                private const string _leftUp = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftUp.png";
+                private const string _rightDown = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightDown.png";
 
-        private const string _carBlue = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
-        private const string _carBlueBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
+                private const string _carBlue = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
+                private const string _carBlueBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
 
-        private const string _carOrange = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
-        private const string _carOrangeBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
+                private const string _carOrange = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
+                private const string _carOrangeBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
 
-        private const string _carYellow = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
-        private const string _carYellowBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
+                private const string _carYellow = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
+                private const string _carYellowBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
 
-        private const string _carRed = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
-        private const string _carRedBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
+                private const string _carRed = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
+                private const string _carRedBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
 
-        private const string _carGrey = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
-        private const string _carGreyBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
+                private const string _carGrey = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
+                private const string _carGreyBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
 
-        private const string _carGreen = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
-        private const string _carGreenBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
+                private const string _carGreen = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
+                private const string _carGreenBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";*/
         #endregion
-
-        private const int _size = 32;
         private const float _factor = 0.2f;
         private static Direction _direction { get; set; }
-        private static Race? _currentRace { get; set; }
         public static BitmapSource DrawTrack(Track track)
         {
-            Bitmap emptyImage = createImage.CreateBitmap(1500, 1200, track);
+            Bitmap emptyImage = createImage.CreateBitmap(1920, 1500, track);
             Bitmap trackImage = PlaceSections(track, emptyImage, true);
             return createImage.CreateBitmapSourceFromGdiBitmap(trackImage);
         }
 
+        /// <summary>
+        /// Draws the track and the participants
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="bitmap"></param>
+        /// <param name="drawParticipants"></param>
+        /// <returns></returns>
         public static Bitmap PlaceSections(Track t, Bitmap bitmap, bool drawParticipants)
         {
-            
+
             float x = 32;
-            float y = bitmap.Height * 0.14f;
+            float y = bitmap.Height * 0.2f;
 
             Graphics graphics = Graphics.FromImage(bitmap);
             foreach (Section section in t.Sections)
@@ -137,7 +135,7 @@ namespace WpfApp
                         bd = createImage.GetImageOutOfFolder(_leftUp);
                         switch (_direction)
                         {
-                            case Direction.East: 
+                            case Direction.East:
                                 y -= 98 * _factor;
                                 break;
                             case Direction.North:
@@ -205,7 +203,7 @@ namespace WpfApp
                             IParticipant participant = sd.Right;
                             DrawDriver(graphics, participant, sd, x, y, _direction);
                         }
-                        
+
                         break;
 
                 }
@@ -243,6 +241,11 @@ namespace WpfApp
             return bitmap;
         }
 
+        /// <summary>
+        /// Returns the driver image based on the teamcolor and the broken image when the status is set to broken
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns></returns>
         private static string GetDriverImage(IParticipant driver)
         {
             switch (driver.TeamColor)
@@ -264,6 +267,13 @@ namespace WpfApp
             }
         }
 
+        /// <summary>
+        /// The x offset of the section where the participant is supposed to be drawn on
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="direction"></param>
+        /// <param name="side"></param>
+        /// <returns></returns>
         private static float XCorrection(float x, Direction direction, string side)
         {
             if (side.Equals("left"))
@@ -284,7 +294,13 @@ namespace WpfApp
             }
             return x;
         }
-
+        /// <summary>
+        /// The y offset of the section where the participant is supposed to be drawn on
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="direction"></param>
+        /// <param name="side"></param>
+        /// <returns></returns>
         private static float YCorrection(float y, Direction direction, string side)
         {
             if (side.Equals("left"))
@@ -306,6 +322,15 @@ namespace WpfApp
             return y;
         }
 
+        /// <summary>
+        /// Draws the driver on the track
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="p"></param>
+        /// <param name="sd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="direction"></param>
         private static void DrawDriver(Graphics g, IParticipant p, SectionData sd, float x, float y, Direction direction)
         {
             if (p == sd.Left)
@@ -318,6 +343,14 @@ namespace WpfApp
             }
         }
 
+        /// <summary>
+        /// Draws the image and rotates the image if needed
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="bitmap"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="r"></param>
         private static void DrawDefaults(Graphics g, Bitmap bitmap, float x, float y, Direction r)
         {
             Bitmap bitm = new Bitmap(bitmap);
@@ -325,7 +358,7 @@ namespace WpfApp
             {
                 case Direction.North:
                     bitm.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
+                    g.DrawImage(bitm, new RectangleF(x, y, bitmap.Height * _factor, bitmap.Width * _factor));
                     break;
                 case Direction.East:
                     g.DrawImage(bitm, new RectangleF(x, y, bitmap.Width * _factor, bitmap.Height * _factor));
@@ -341,6 +374,10 @@ namespace WpfApp
             }
         }
 
+        /// <summary>
+        /// Updates the direction when a corner is reached
+        /// </summary>
+        /// <param name="sectionType"></param>
         private static void CalculateDirection(SectionTypes sectionType)
         {
             switch (sectionType)
@@ -357,185 +394,5 @@ namespace WpfApp
                     else { _direction = Direction.West; break; }
             }
         }
-
-        #region Eigen methodes
-        /*        public static string getSymbol(Section section, Direction HuidigeDirection)
-                {
-                    switch (section.SectionType)
-                    {
-                        case Section.SectionTypes.RightCorner:
-                            switch (HuidigeDirection)
-                            {
-                                case Direction.South:
-                                    return _leftUp;
-                                case Direction.West:
-                                    return _leftDown;
-                                case Direction.North:
-                                    return _rightUp;
-                                case Direction.East:
-                                    return _rightDown;
-                            }
-                            break;
-                        case Section.SectionTypes.LeftCorner:
-                            switch (HuidigeDirection)
-                            {
-                                case Direction.South:
-                                    return _leftDown;
-                                case Direction.West:
-                                    return _rightUp;
-                                case Direction.North:
-                                    return _rightDown;
-                                case Direction.East:
-                                    return _leftUp;
-                            }
-                            break;
-                        case Section.SectionTypes.Straight:
-                            {
-                                switch (HuidigeDirection)
-                                {
-                                    case Direction.South:
-                                    case Direction.North:
-                                        return _straightVertical;
-                                    case Direction.East:
-                                    case Direction.West:
-                                        return _straightHorizontal;
-                                }
-                                break;
-                            }
-                        case Section.SectionTypes.StartGrid:
-                            {
-                                switch (HuidigeDirection)
-                                {
-                                    case Direction.South:
-                                    case Direction.North:
-                                        return _startVertical;
-                                    case Direction.East:
-                                    case Direction.West:
-                                        return _startHorizontal;
-                                }
-                                break;
-                            }
-                        case Section.SectionTypes.Finish:
-                            {
-                                switch (HuidigeDirection)
-                                {
-                                    case Direction.South:
-                                    case Direction.North:
-                                        return _finishVertical;
-                                    case Direction.East:
-                                    case Direction.West:
-                                        return _finishHorizontal;
-                                }
-                                break;
-                            }
-                    }
-                    return null;
-
-                }*/
-
-/*        public static Bitmap PlaceSections(Track track, Bitmap bitmap)
-        {
-            int startpositieX = 25;
-            int startpositieY = 5;
-
-            var it = track.Sections.First;
-            Graphics graphics = Graphics.FromImage(bitmap);
-
-            while (it != null)
-            {
-                string? symbool = getSymbol(it.Value, _direction);
-                it = it.Next;
-
-                if (symbool == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    DrawDefaults(graphics, createImage.GetImageOutOfFolder(symbool), startpositieX, startpositieY, _direction);
-
-                    if (it == null)
-                    {
-                        break;
-                    }
-
-                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.RightCorner)
-                    {
-                        switch (_direction)
-                        {
-                            case Direction.North:
-                                {
-                                    _direction = Direction.East;
-                                }
-                                break;
-                            case Direction.East:
-                                {
-                                    _direction = Direction.South;
-                                }
-                                break;
-                            case Direction.South:
-                                {
-                                    _direction = Direction.West;
-                                }
-                                break;
-                            case Direction.West:
-                                {
-                                    _direction = Direction.North;
-                                }
-                                break;
-                        }
-                    }
-
-                    if (it.Previous != null && it.Previous.Value.SectionType == Section.SectionTypes.LeftCorner)
-                    {
-                        switch (_direction)
-                        {
-                            case Direction.North:
-                                {
-                                    _direction = Direction.West;
-                                }
-                                break;
-                            case Direction.East:
-                                {
-                                    _direction = Direction.North;
-                                }
-                                break;
-                            case Direction.South:
-                                {
-                                    _direction = Direction.East;
-                                }
-                                break;
-                            case Direction.West:
-                                {
-                                    _direction = Direction.South;
-                                }
-                                break;
-                        }
-                    }
-                    string? volgendeSymbool = getSymbol(it.Value, _direction);
-                    if (volgendeSymbool != null)
-                    {
-                        switch (_direction)
-                        {
-                            case Direction.North:
-                                startpositieY -= volgendeSymbool.Length;
-                                break;
-                            case Direction.South:
-                                startpositieY += symbool.Length;
-                                break;
-                            case Direction.East:
-                                startpositieX += symbool.Length;
-                                break;
-                            case Direction.West:
-                                startpositieX -= volgendeSymbool.Length;
-                                break;
-                        }
-                    }
-                    _direction = Direction.North;
-                    return bitmap;
-                }
-            }
-        }*/
-        #endregion
     }
 }

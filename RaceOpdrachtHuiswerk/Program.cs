@@ -1,9 +1,11 @@
 ﻿using Controller;
-using Model;
 using RaceOpdrachtHuiswerk;
-using System;
 
 Data.Initialize();
+Console.Clear();
+Console.SetWindowSize(250, 80);
+Console.SetBufferSize(Console.WindowLeft + Console.WindowWidth, Console.WindowTop + Console.WindowHeight);
+
 Data.CompetitionEnded += (_, _) =>
 {
     Console.Clear();
@@ -14,6 +16,7 @@ Data.CompetitionEnded += (_, _) =>
         Console.WriteLine(participant.Name + " won!");
     }
 };
+
 Data.NextRaceEvent += VisualisatieStatic.OnNextRaceEvent;
 Data.NextRace();
 
@@ -23,7 +26,7 @@ Console.WriteLine(Data.CurrentRace.Track.Name);
 Data.NextRace();
 Console.WriteLine(Data.CurrentRace.Track.Name);*/
 
-for (; ; ) 
+for (; ; )
 {
     Thread.Sleep(100);
 }

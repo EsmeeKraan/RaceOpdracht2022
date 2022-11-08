@@ -1,12 +1,4 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 
 
@@ -36,6 +28,8 @@ namespace Controller
 
         private List<IParticipant> _finishOrder = new();
 
+        private object _positionsLock = new object();
+
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
         public event EventHandler RaceFinished;
@@ -48,7 +42,6 @@ namespace Controller
             Participants = participants;
             StartTime = DateTime.Now;
             _random = new(DateTime.Now.Millisecond);
-            _positions = new();
 
             _timer = new System.Timers.Timer(_timerInterval);
             _timer.Elapsed += OnTimedEvent;
@@ -68,9 +61,9 @@ namespace Controller
         {
             Queue<IParticipant> participantsTemp = new Queue<IParticipant>(participants);
 
-            foreach(Section section in track.Sections)
+            foreach (Section section in track.Sections)
             {
-                if(section.SectionType == Section.SectionTypes.StartGrid)
+                if (section.SectionType == Section.SectionTypes.StartGrid)
                 {
                     SectionData? sectionData = GetSectionData(section);
 
@@ -83,7 +76,7 @@ namespace Controller
                 }
             }
         }
-        
+
         /// <summary>
         /// Initialises first lap with the participant
         /// Used for keeping count of the amount of laps the participant has driven
@@ -91,9 +84,9 @@ namespace Controller
         public void InitializeFirstLap()
         {
             _lapsDriven = new Dictionary<IParticipant, int>();
-            foreach(IParticipant participant in Participants)
+            foreach (IParticipant participant in Participants)
             {
-                _lapsDriven.Add(participant, 1);
+                _lapsDriven.Add(participant, -1);
             }
         }
 
@@ -121,12 +114,12 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Moves all the participants when they're not broken
         /// </summary>
         /// <param name="time"></param>
-        public void MoveParticipant(DateTime time)
+        public void MoveParticipants(DateTime time)
         {
-            LinkedListNode<Section> currentSectionNode = Track.Sections.Last;
+            LinkedListNode<Section>? currentSectionNode = Track.Sections.Last;
 
             while (currentSectionNode != null)
             {
@@ -137,7 +130,7 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Moves the participants on the left and right lane
         /// </summary>
         /// <param name="currentSection"></param>
         /// <param name="nextSection"></param>
@@ -145,8 +138,8 @@ namespace Controller
         /// <param name="node"></param>
         public void MoveSectionData(Section currentSection, Section nextSection, DateTime time, LinkedListNode<Section> node)
         {
-                SectionData currentSectionData = GetSectionData(currentSection);
-                SectionData nextSectionData = GetSectionData(nextSection);
+            SectionData currentSectionData = GetSectionData(currentSection);
+            SectionData nextSectionData = GetSectionData(nextSection);
 
             if (currentSectionData.Left != null && !currentSectionData.Left.Equipment.IsBroken)
             {
@@ -155,10 +148,10 @@ namespace Controller
                 while (true)
                 {
                     Side? side = MoveLane(nextSide, currentSectionData, nextSectionData, time, currentSection.SectionType);
-                    
+
                     if (side == null)
                         break;
-                    
+
 
                     nextSide = (Side)side;
                     currentSectionData = nextSectionData;
@@ -184,85 +177,10 @@ namespace Controller
                     nextSectionData = GetSectionData(nextSection);
                 }
             }
-
-            
-
-#if OldMethod
-            if (currentSectionData.DistanceLeft >= 100 && currentSectionData.DistanceRight >= 100)
-                {
-                    #region Beide participants kunnen bewegen
-                    int freePlace = CheckIfFreePlace(nextSectionData);
-
-                    if(freePlace == 0)// links en rechts is geen plek voor drivers om te bewegen
-                    {
-                        currentSectionData.DistanceLeft = 99;
-                        currentSectionData.DistanceRight = 99;
-                    }
-                    else if (freePlace == 3) // links en rechts is plek voor drivers
-                    {
-                        MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Left, false, time);
-                        MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Right, false, time);
-                    }
-                    else
-                    {
-                        if (currentSectionData.DistanceLeft >= currentSectionData.DistanceRight)
-                        {
-                            // prefer left
-                            if (freePlace == 1)
-                                MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Left, true, time); // left to left
-                            else if (freePlace == 2)
-                                MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Right, true, time);
-                        }
-                        else
-                        {
-                            // choose right
-                            if (freePlace == 1)
-                                MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Left, true, time); // left to left
-                            else if (freePlace == 2)
-                                MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Right, true, time);
-                        }
-                    }
-                    #endregion
-                }
-            else if (currentSectionData.DistanceLeft >= 100 && currentSectionData.Left != null)
-            {
-                #region Linker participant kan bewegen
-
-                // for freesections, prefer same spot, otherwise take other
-                int freePlaces = CheckIfFreePlace(nextSectionData);
-                if (freePlaces == 0)
-                    currentSectionData.DistanceLeft = 100;
-                else if (freePlaces == 3 || freePlaces == 1)
-                    // move from left to left
-                    MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Left, false, time);
-                else if (freePlaces == 2)
-                    // move from left to right
-                    MoveSingleParticipant(currentSection, nextSection, Side.Left, Side.Right, false, time);
-
-                #endregion
-            }
-            else if (currentSectionData.DistanceRight >= 100 && currentSectionData.Right != null)
-            {
-                #region Rechter participant kan bewegen
-
-                // for freesections, prefer same spot, otherwise take other
-                int freePlaces = CheckIfFreePlace(nextSectionData);
-                if (freePlaces == 0)
-                    currentSectionData.DistanceRight = 100;
-                else if (freePlaces == 3 || freePlaces == 2)
-                    // move from right to right
-                    MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Right, false, time);
-                else if (freePlaces == 1)
-                    // move from right to left
-                    MoveSingleParticipant(currentSection, nextSection, Side.Right, Side.Left, false, time);
-
-                #endregion
-            }
-#endif
         }
 
         /// <summary>
-        /// 
+        /// Moves the participant from lane and also keeps in mind if a participant wants to surpass a competitor on the next lane
         /// </summary>
         /// <param name="side"></param>
         /// <param name="currentSectionData"></param>
@@ -273,12 +191,12 @@ namespace Controller
         private Side? MoveLane(Side side, SectionData currentSectionData, SectionData nextSectionData, DateTime time, Section.SectionTypes currentSectionType)
         {
             var distance = side == Side.Left
-                         ? currentSectionData.DistanceLeft
-                         : currentSectionData.DistanceRight;
+                         ? currentSectionData.DistanceLeft!
+                         : currentSectionData.DistanceRight!;
 
             var participant = side == Side.Left
-                            ? currentSectionData.Left
-                            : currentSectionData.Right;
+                            ? currentSectionData.Left!
+                            : currentSectionData.Right!;
 
             if (distance < 100)
                 return null;
@@ -316,7 +234,7 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Increases the distance of the participant when they're on the left side of the track
         /// </summary>
         /// <param name="participant"></param>
         /// <param name="distance"></param>
@@ -332,7 +250,7 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Increases the distance of the participant when they're on the right side of the track
         /// </summary>
         /// <param name="participant"></param>
         /// <param name="distance"></param>
@@ -348,7 +266,8 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Checks if participant on a certain side and has finished
+        /// Marks the participant finished so their ready to be removed from the track
         /// </summary>
         /// <param name="sectiondata"></param>
         /// <param name="side"></param>
@@ -375,51 +294,6 @@ namespace Controller
 
         public int GetSpeedFromCompetitor(IParticipant iParticipant) => Convert.ToInt32(Math.Ceiling(0.12 * (iParticipant.Equipment.Speed * 0.51) * iParticipant.Equipment.Performance + 15));
 
-
-
-        #region Events
-        private void OnTimedEvent(object sender, ElapsedEventArgs e)
-        {
-            CheckIfEquipmentsShouldBreakOrBeRepaired();
-            MoveParticipant(DateTime.Now);
-
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track) { Track = this.Track });
-
-            if (CheckIfFinished())
-            {
-                for(int i = 0; i < _finishOrder.Count; i++)
-                {
-                    int points = 0;
-                    switch (i)
-                    {
-                        case 0: points = 15; 
-                            break;
-                        case 1: points = 12;
-                            break;
-                        case 2: points = 10;
-                            break;
-                        case 3: points = 8;
-                            break;
-                        case 4: points = 7;
-                            break;
-                        case 5: points = 5;
-                            break;
-                        case 6: points = 3;
-                            break;
-                        case 7: points = 1;
-                            break;
-                    }
-                    _finishOrder[i].Points += points;
-                }
-                _timer.Stop();
-                EndTime = e.SignalTime;
-                IsOver = true;
-                RaceFinished?.Invoke(this, new EventArgs());
-            }
-            
-        }
-        #endregion
-
         /// <summary>
         /// Randomly decides if the equipment should break and the participant will be 'isBroken'
         /// </summary>
@@ -431,7 +305,7 @@ namespace Controller
 
             _lastSeenBroken = now;
 
-            foreach(var participant in Participants)
+            foreach (var participant in Participants)
             {
                 // Equipment quality is randomizes in 'RandomizeEquipment'
                 // Quality has a chance of being 60 to 100, which means each participant has a 1-40% chance of breaking
@@ -444,13 +318,12 @@ namespace Controller
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
-        public SectionData? GetSectionData(Section section)
+        public SectionData GetSectionData(Section section)
         {
-
             if (!_positions.ContainsKey(section)) _positions.TryAdd(section, new SectionData());
             return _positions[section];
         }
-            
+
         /// <summary>
         /// Randomizes the equipment quality, performance and speed
         /// </summary>
@@ -464,17 +337,26 @@ namespace Controller
 
 
 
-        public bool CheckIfFinished() {
+        public bool CheckIfFinished()
+        {
             return _positions.Values.FirstOrDefault(a => a.Left != null || a.Right != null) == null;
         }
 
+        #endregion
+
         #region Timer & Cleanup
+        /// <summary>
+        /// 
+        /// </summary>
         public void Start()
         {
             StartTime = DateTime.Now;
             _timer.Start();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CleanUp()
         {
             _timer.Stop();
@@ -483,6 +365,63 @@ namespace Controller
         }
         #endregion
 
+        #region Events
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            lock (_positionsLock)
+            {
+                CheckIfEquipmentsShouldBreakOrBeRepaired();
+                MoveParticipants(DateTime.Now);
+
+                DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track) { Track = this.Track });
+
+                if (CheckIfFinished())
+                {
+                    for (int i = 0; i < _finishOrder.Count; i++)
+                    {
+                        int points = 0;
+                        switch (i)
+                        {
+                            case 0:
+                                points = 15;
+                                break;
+                            case 1:
+                                points = 12;
+                                break;
+                            case 2:
+                                points = 10;
+                                break;
+                            case 3:
+                                points = 8;
+                                break;
+                            case 4:
+                                points = 7;
+                                break;
+                            case 5:
+                                points = 5;
+                                break;
+                            case 6:
+                                points = 3;
+                                break;
+                            case 7:
+                                points = 1;
+                                break;
+                        }
+                        _finishOrder[i].Points += points;
+                    }
+                    _timer.Stop();
+                    EndTime = e.SignalTime;
+                    IsOver = true;
+                    RaceFinished?.Invoke(this, new EventArgs());
+                }
+            }
+
+        }
         #endregion
     }
 }

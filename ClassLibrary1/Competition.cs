@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model
 {
     public class Competition
     {
@@ -15,8 +9,9 @@ namespace Model
         #endregion
 
         #region Methodes
-        public Track NextTrack() {
-            if(Tracks.Count == 0)
+        public Track NextTrack()
+        {
+            if (Tracks.Count == 0)
             {
                 return null;
             }

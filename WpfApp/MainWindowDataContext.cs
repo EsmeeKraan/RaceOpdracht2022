@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Controller;
+using Model;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using Controller;
-using Model;
 
 namespace WpfApp
 {
@@ -39,12 +34,12 @@ namespace WpfApp
 
         private void Data_NextRaceEvent(object? sender, NextRaceEventArgs e)
         {
-            if(_dispatcher == null)
+            if (_dispatcher == null)
             {
                 return;
             }
 
-            if(Data.CurrentRace != null)
+            if (Data.CurrentRace != null)
             {
                 Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
                 Data.CurrentRace.DriversChanged += CurrentRace_Race_DriversChanged;
@@ -52,7 +47,7 @@ namespace WpfApp
 
             _dispatcher((Action)(() =>
             {
-                TrackName = Data.CurrentRace?.Track.Name ??"";
+                TrackName = Data.CurrentRace?.Track.Name ?? "";
                 CompetitionName = Data.Competition.Name;
                 CompetitionPointsGiving();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));

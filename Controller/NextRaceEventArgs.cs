@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Controller
+﻿namespace Controller
 {
     /// <summary>
     /// Class for the NextRaceEvent, Contains an object from the Class Race

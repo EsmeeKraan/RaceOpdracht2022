@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model
 {
     public interface IEquipment
     {
         #region Properties
-        int Quality { get; set;  }  
-        int Performance { get; set; }   
+        int Quality { get; set; }
+        int Performance { get; set; }
         int Speed { get; set; }
         bool IsBroken { get; set; }
         #endregion

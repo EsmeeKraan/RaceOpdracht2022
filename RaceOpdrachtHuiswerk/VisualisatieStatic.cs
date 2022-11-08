@@ -1,12 +1,5 @@
 ﻿using Controller;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static RaceOpdrachtHuiswerk.VisualisatieStatic;
 
 namespace RaceOpdrachtHuiswerk
 {
@@ -24,65 +17,67 @@ namespace RaceOpdrachtHuiswerk
         private static readonly object _lock = new();
         private static Race _currentRace;
         private static Directions _currentDirection;
+        #endregion
 
         #region graphics
 
-        private static string[] _finishHorizontal = { "══",
-                                                      " #",
-                                                      " #",
-                                                      "══" };
+        private static string[] _finishHorizontal = { "═════",
+                                                      "  #  ",
+                                                      "  #  ",
+                                                      "═════" };
 
 
-        private static string[] _startHorizontal = { "══",
-                                                     " L",
-                                                     " R",
-                                                     "══" };
+        private static string[] _startHorizontal = { "═════",
+                                                     "  L  ",
+                                                     "  R  ",
+                                                     "═════" };
 
 
-        private static string[] _finishVertical = {"║ #  # ║",
-                                                   "║      ║", };
+        private static string[] _finishVertical = { "║ #  # ║", };
 
 
         private static string[] _startVertical = {"║ *  * ║",
                                                   "║      ║"};
 
 
-        private static string[] _straightHorizontal = { "══", 
-                                                        " L", 
-                                                        " R",
-                                                        "══" };
+        private static string[] _straightHorizontal = { "═════",
+                                                        "  L  ",
+                                                        "  R  ",
+                                                        "═════" };
 
 
-        private static string[] _straightVertical = { "║     ║",
-                                                      "║ L  R║",};
+        private static string[] _straightVertical = { "║ L  R ║",
+                                                      "║      ║",};
 
-        private static string[] _rightDown = { "══════╗"
-                                             , "    R ║"
-                                             , "  L   ║"
-                                             , "╗     ║" };
-
-
-        private static string[] _leftDown = { "║     ╚", 
-                                              "║   L  ",
-                                              "║ R    ",
-                                              "╚══════" };
-
-        private static string[] _rightUp = { "╔══════",
-                                             "║  R   ",
-                                             "║    L ",
-                                             "║     ╔" };
+        private static string[] _rightDown = { "═══════╗"
+                                             , "     R ║"
+                                             , "  L    ║"
+                                             , "╗      ║" };
 
 
-        private static string[] _leftUp = { "╝     ║", 
-                                            "  L   ║", 
-                                            "     R║", 
-                                            "══════╝" };
+        private static string[] _leftDown = { "║      ╚",
+                                              "║   L   ",
+                                              "║ R     ",
+                                              "╚═══════" };
 
-        #endregion
+        private static string[] _rightUp = { "╔═══════",
+                                             "║  R    ",
+                                             "║    L  ",
+                                             "║      ╔" };
+
+
+        private static string[] _leftUp = { "╝      ║",
+                                            "  L    ║",
+                                            "     R ║",
+                                            "═══════╝" };
 
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Initializes the race and prepares the console for the upcoming track to be printed on
+        /// </summary>
+        /// <param name="race"></param>
         public static void Initialize(Race race)
         {
             _currentRace = race;
@@ -90,6 +85,9 @@ namespace RaceOpdrachtHuiswerk
             PrepareConsole();
         }
 
+        /// <summary>
+        /// Clears the console, sets the cursor point and track name as the title
+        /// </summary>
         private static void PrepareConsole()
         {
             Console.CursorVisible = false;
@@ -100,16 +98,21 @@ namespace RaceOpdrachtHuiswerk
                 Console.Title = $"Track: {_currentRace.Track.Name}";
             }
         }
+
+        /// <summary>
+        /// Draws the sections and the participants on the console
+        /// </summary>
+        /// <param name="track"></param>
         public static void DrawTrack(Track track)
         {
             int startpositieX = 25;
-            int startpositieY = 5;
+            int startpositieY = 8;
 
             var it = track.Sections.First;
 
-            while(it != null)
+            while (it != null)
             {
-                string[]? symbool = getSymbol(it.Value, _currentDirection);
+                string[]? symbool = GetSymbol(it.Value, _currentDirection);
                 var sectionData = _currentRace.GetSectionData(it.Value);
                 it = it.Next;
 
@@ -179,7 +182,7 @@ namespace RaceOpdrachtHuiswerk
                                 break;
                         }
                     }
-                    string[]? volgendeSymbool = getSymbol(it.Value, _currentDirection);
+                    string[]? volgendeSymbool = GetSymbol(it.Value, _currentDirection);
                     if (volgendeSymbool != null)
                     {
                         switch (_currentDirection)
@@ -199,16 +202,24 @@ namespace RaceOpdrachtHuiswerk
                         }
                     }
                 }
-            } 
+            }
         }
-            public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
+
+        /// <summary>
+        /// Prints the section on the console and replaces the placeholders with the participants' name
+        /// </summary>
+        /// <param name="sectionStrings"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="sectionData"></param>
+        public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
         {
             char left = ' ';
             char right = ' ';
 
-            if(sectionData != null)
+            if (sectionData != null)
             {
-                if(sectionData.Left != null)
+                if (sectionData.Left != null)
                 {
                     left = sectionData.Left.Name[0];
                 }
@@ -217,7 +228,6 @@ namespace RaceOpdrachtHuiswerk
                     right = sectionData.Right.Name[0];
                 }
             }
-
 
             foreach (string s in sectionStrings)
             {
@@ -229,7 +239,14 @@ namespace RaceOpdrachtHuiswerk
             }
         }
 
-        public static string[] getSymbol(Section section, Directions HuidigeDirection)
+        /// <summary>
+        /// Resolves the sectionType with the correct direction to the symbol
+        /// A symbol is a list of strings, the track boundaries
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="HuidigeDirection"></param>
+        /// <returns></returns>
+        public static string[] GetSymbol(Section section, Directions HuidigeDirection)
         {
             switch (section.SectionType)
             {
@@ -305,19 +322,26 @@ namespace RaceOpdrachtHuiswerk
         #endregion
 
         #region Events
+        /// <summary>
+        /// At the beginning of the first race and next races this events makes sure that the console is updated for the next race
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void OnNextRaceEvent(object? sender, NextRaceEventArgs e)
         {
             Initialize(e.Race);
-
             _currentRace.DriversChanged += OnDriversChanged;
-
-            DrawTrack(_currentRace.Track);
         }
 
+        /// <summary>
+        /// This eventHandler is called when the participants have moved and updates the console
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void OnDriversChanged(object? sender, DriversChangedEventArgs e)
         {
             var race = Data.CurrentRace;
-            lock (_lock)
+            lock (_lock) //Ensures that only one thread updates the console at the same time
             {
                 if (race.IsOver)
                     return;

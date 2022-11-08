@@ -1,9 +1,4 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ControllerTest
@@ -42,7 +37,6 @@ namespace ControllerTest
             Track track = new Track("Shertbert Land", new Section.SectionTypes[0]);
             _competition.Tracks.Enqueue(track);
             var result = _competition.NextTrack();
-            result = _competition.NextTrack();
             Assert.AreEqual(track, result);
 
         }
