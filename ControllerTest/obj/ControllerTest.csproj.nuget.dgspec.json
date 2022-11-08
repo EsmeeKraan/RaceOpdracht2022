@@ -66,7 +66,7 @@
         "projectName": "ControllerTest",
         "projectPath": "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\ControllerTest\\ControllerTest.csproj",
         "packagesPath": "C:\\Users\\esmee\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\esmee\\Source\\Repos\\RaceOpdracht2022\\ControllerTest\\obj\\",
+        "outputPath": "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\ControllerTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\esmee\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -147,7 +147,7 @@
         "projectName": "Controller",
         "projectPath": "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\Controller\\Controller.csproj",
         "packagesPath": "C:\\Users\\esmee\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\esmee\\Source\\Repos\\RaceOpdracht2022\\Controller\\obj\\",
+        "outputPath": "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\Controller\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\esmee\\AppData\\Roaming\\NuGet\\NuGet.Config",

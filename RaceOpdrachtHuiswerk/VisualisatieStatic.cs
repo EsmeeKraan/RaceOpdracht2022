@@ -27,57 +27,62 @@ namespace RaceOpdrachtHuiswerk
 
         #region graphics
 
-        private static string[] _finishHorizontal = { "═",
-                                                      "#",
-                                                      "#",
-                                                      "═" };
+        private static string[] _finishHorizontal = { "══",
+                                                      " #",
+                                                      " #",
+                                                      "══" };
 
 
-        private static string[] _startHorizontal = { "═",
-                                                     "L",
-                                                     "R",
-                                                     "═" };
+        private static string[] _startHorizontal = { "══",
+                                                     " L",
+                                                     " R",
+                                                     "══" };
 
 
-        private static string[] _finishVertical = {"║ #  # ║", };
+        private static string[] _finishVertical = {"║ #  # ║",
+                                                   "║      ║", };
 
 
-        private static string[] _startVertical = {"║ *  * ║", };
+        private static string[] _startVertical = {"║ *  * ║",
+                                                  "║      ║"};
 
 
-        private static string[] _straightHorizontal = { "═", 
-                                                        "L", 
-                                                        "R", 
-                                                        "═" };
+        private static string[] _straightHorizontal = { "══", 
+                                                        " L", 
+                                                        " R",
+                                                        "══" };
 
 
-        private static string[] _straightVertical = { "║ L  R ║", };
+        private static string[] _straightVertical = { "║     ║",
+                                                      "║ L  R║",};
 
-        private static string[] _rightDown = { "═══════╗"
-                                             , "    R  ║"
-                                             , "  L    ║"
-                                             , "╗      ║" };
-
-
-        private static string[] _leftDown = { "║      ╚", 
-                                              "║    L  ",
-                                              "║  R    ",
-                                              "╚═══════" };
-
-        private static string[] _rightUp = { "╔═══════",
-                                             "║  R    ",
-                                             "║    L  ",
-                                             "║      ╔" };
+        private static string[] _rightDown = { "══════╗"
+                                             , "    R ║"
+                                             , "  L   ║"
+                                             , "╗     ║" };
 
 
-        private static string[] _leftUp = { "╝      ║", 
-                                            "  L    ║", 
-                                            "     R ║", 
-                                            "═══════╝" };
+        private static string[] _leftDown = { "║     ╚", 
+                                              "║   L  ",
+                                              "║ R    ",
+                                              "╚══════" };
+
+        private static string[] _rightUp = { "╔══════",
+                                             "║  R   ",
+                                             "║    L ",
+                                             "║     ╔" };
+
+
+        private static string[] _leftUp = { "╝     ║", 
+                                            "  L   ║", 
+                                            "     R║", 
+                                            "══════╝" };
 
         #endregion
 
         #endregion
+
+        #region Methods
         public static void Initialize(Race race)
         {
             _currentRace = race;
@@ -94,15 +99,6 @@ namespace RaceOpdrachtHuiswerk
                 Console.SetCursorPosition(0, 0);
                 Console.Title = $"Track: {_currentRace.Track.Name}";
             }
-        }
-
-        public static void OnNextRaceEvent(object sender, NextRaceEventArgs e)
-        {
-            Initialize(e.Race);
-
-            _currentRace.DriversChanged += OnDriversChanged;
-
-            DrawTrack(_currentRace.Track);
         }
         public static void DrawTrack(Track track)
         {
@@ -205,17 +201,6 @@ namespace RaceOpdrachtHuiswerk
                 }
             } 
         }
-
-        private static void OnDriversChanged(object sender, DriversChangedEventArgs e)
-        {
-            var race = Data.CurrentRace;
-            lock (_lock)
-            {
-                if (race.IsOver)
-                    return;
-                DrawTrack(e.Track);
-            }
-        }
             public static void ConsoleWriteSection(string[] sectionStrings, int x, int y, SectionData? sectionData)
         {
             char left = ' ';
@@ -317,7 +302,28 @@ namespace RaceOpdrachtHuiswerk
             return null;
 
         }
+        #endregion
 
+        #region Events
+        public static void OnNextRaceEvent(object? sender, NextRaceEventArgs e)
+        {
+            Initialize(e.Race);
 
+            _currentRace.DriversChanged += OnDriversChanged;
+
+            DrawTrack(_currentRace.Track);
+        }
+
+        private static void OnDriversChanged(object? sender, DriversChangedEventArgs e)
+        {
+            var race = Data.CurrentRace;
+            lock (_lock)
+            {
+                if (race.IsOver)
+                    return;
+                DrawTrack(e.Track);
+            }
+        }
+        #endregion
     }
 }

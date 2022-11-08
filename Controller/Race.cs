@@ -93,7 +93,7 @@ namespace Controller
             _lapsDriven = new Dictionary<IParticipant, int>();
             foreach(IParticipant participant in Participants)
             {
-                _lapsDriven.Add(participant, -1);
+                _lapsDriven.Add(participant, 1);
             }
         }
 
@@ -444,7 +444,7 @@ namespace Controller
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
-        public SectionData GetSectionData(Section section)
+        public SectionData? GetSectionData(Section section)
         {
 
             if (!_positions.ContainsKey(section)) _positions.TryAdd(section, new SectionData());

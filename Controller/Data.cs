@@ -18,13 +18,13 @@ namespace Controller
         public static event EventHandler<NextRaceEventArgs> NextRaceEvent;
         public static event EventHandler<NextRaceEventArgs> CompetitionEnded;
 
-        private static bool _lastRace;
-
         static Data()
         {
             Initialize();
         }
-
+        /// <summary>
+        /// Initiates the NextRace and the event that places the track and participants
+        /// </summary>
         public static void NextRace()
         {
             CurrentRace?.CleanUp();
@@ -43,13 +43,18 @@ namespace Controller
             }
         }
 
+        /// <summary>
+        /// Initialises a race, makes a new competition, adds participants and the track
+        /// </summary>
         public static void Initialize()
         {
             Competition = new Competition("Mushroom Cup");
             addParticipants();
             addTracks();
         }
-
+        /// <summary>
+        /// Adding participants to a Competition, gives their name, first points and teamcolor
+        /// </summary>
         public static void addParticipants()
         {
             Competition.Participants.Add(new Driver("Yoshi", 0, IParticipant.TeamColors.Green));
@@ -57,13 +62,18 @@ namespace Controller
             Competition.Participants.Add(new Driver("Toad", 0, IParticipant.TeamColors.Red));
             Competition.Participants.Add(new Driver("Donkey Kong", 0, IParticipant.TeamColors.Orange));
             Competition.Participants.Add(new Driver("Peach", 0, IParticipant.TeamColors.Yellow));
-            Competition.Participants.Add(new Driver("Waluigi", 0, IParticipant.TeamColors.Grey));
+            Competition.Participants.Add(new Driver("Waluigi", 0, IParticipant.TeamColors.Blue));
+            Competition.Participants.Add(new Driver("Bowser", 0, IParticipant.TeamColors.Grey));
+            Competition.Participants.Add(new Driver("Daisy", 0, IParticipant.TeamColors.Yellow));
         }
 
+        /// <summary>
+        /// Adds a track to a competition with a name and all the sections that make up the track
+        /// </summary>
         public static void addTracks()
         {
-           Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[]
-            {
+            Competition.Tracks.Enqueue(new Track("Rainbow Road", new Section.SectionTypes[]
+             {
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -75,7 +85,20 @@ namespace Controller
                 Section.SectionTypes.Finish,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -101,54 +124,7 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.RightCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.RightCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.RightCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.LeftCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.LeftCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.RightCorner,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-            }));
+             }));
             Competition.Tracks.Enqueue(new Track("Mushroom Village", new Section.SectionTypes[]
             {
                 Section.SectionTypes.RightCorner,
@@ -162,8 +138,6 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
                 Section.SectionTypes.LeftCorner,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
@@ -190,9 +164,8 @@ namespace Controller
                 Section.SectionTypes.Finish,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
-                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
@@ -204,8 +177,18 @@ namespace Controller
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+
             }));
             Competition.Tracks.Enqueue(new Track("Coconut Mall", new Section.SectionTypes[]
             {
@@ -283,7 +266,11 @@ namespace Controller
                 Section.SectionTypes.Straight,
             }));
         }
-
+        /// <summary>
+        /// Executes the nextRaceEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void OnRaceFinished(object sender, EventArgs e)
         {
             NextRace();
