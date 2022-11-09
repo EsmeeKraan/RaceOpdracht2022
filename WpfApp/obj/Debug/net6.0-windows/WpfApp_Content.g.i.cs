@@ -20,15 +20,11 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/straightvertical.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_blue.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_blue_broken.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_gray.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_gray_broken.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_green.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_green_broken.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_orange.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_orange_broken.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_red.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_red_broken.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_yellow.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("typesection/teamcolor_yellow_broken.png")]
 
 

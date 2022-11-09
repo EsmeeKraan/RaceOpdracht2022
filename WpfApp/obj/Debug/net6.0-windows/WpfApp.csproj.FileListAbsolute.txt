@@ -108,13 +108,9 @@ C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeS
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\straightVertical.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_BLUE.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_BLUE_BROKEN.png
-C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_GRAY.png
-C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_GRAY_BROKEN.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_GREEN.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_GREEN_BROKEN.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_ORANGE.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_ORANGE_BROKEN.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_RED.png
 C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_RED_BROKEN.png
-C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_YELLOW.png
-C:\Users\MSI\source\repos\RaceOpdracht2022\WpfApp\bin\Debug\net6.0-windows\TypeSection\teamcolor_YELLOW_BROKEN.png

@@ -61,12 +61,12 @@ namespace ControllerTest
             _participants = new List<IParticipant>();
 
             _participants.Add(new Driver("Fake Mario", 0, TeamColors.Blue));
-            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Yellow));
-            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Grey));
-            _participants.Add(new Driver("Fake Waluigi", 0, TeamColors.Orange));
+            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Orange));
+            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Pink));
+            _participants.Add(new Driver("Fake luigi", 0, TeamColors.Green));
             _participants.Add(new Driver("Fake Wario", 0, TeamColors.Red));
-            _participants.Add(new Driver("Fake Yoshi", 0, TeamColors.Green));
-            _participants.Add(new Driver("Fake Toad", 0, TeamColors.Red));
+            _participants.Add(new Driver("Fake Yoshi", 0, TeamColors.DarkGreen));
+            _participants.Add(new Driver("Fake Toad", 0, TeamColors.White));
 
             _testRace = new Race(_track, _participants);
             _testRace.SetDriverStartPosition(_track, _participants);
@@ -82,11 +82,11 @@ namespace ControllerTest
             _track = new Track("TestTrack", new Section.SectionTypes[] { Section.SectionTypes.Straight });
             _participants = new List<IParticipant>();
 
-            _participants.Add(new Driver("Fake Mario", 0, TeamColors.Blue));
-            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Yellow));
-            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Grey));
-            _participants.Add(new Driver("Fake Waluigi", 0, TeamColors.Orange));
-            _participants.Add(new Driver("Fake Wario", 0, TeamColors.Red));
+            _participants.Add(new Driver("Fake Mario", 0, TeamColors.Red));
+            _participants.Add(new Driver("Fake Bowser", 0, TeamColors.Orange));
+            _participants.Add(new Driver("Fake Peach", 0, TeamColors.Pink));
+            _participants.Add(new Driver("Fake luigi", 0, TeamColors.Green));
+            _participants.Add(new Driver("Fake Dry Bones", 0, TeamColors.Blue));
 
             _testRace = new Race(_track, _participants);
             _testRace.SetDriverStartPosition(_track, _participants);

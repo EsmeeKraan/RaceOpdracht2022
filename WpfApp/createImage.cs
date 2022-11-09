@@ -41,6 +41,9 @@ namespace WpfApp
                 return (Bitmap)GetImageOutOfFolder(key).Clone();
             }
             returnBitmap = new Bitmap(x, y);
+            Graphics g = Graphics.FromImage(returnBitmap);
+            SolidBrush solidbrush = new SolidBrush(System.Drawing.Color.BlanchedAlmond);
+            g.FillRectangle(solidbrush, 0, 0, x, y);
             WPFVisualisatie.PlaceSections(track, returnBitmap, false);
             _imageDictionary.Add(key, returnBitmap);
             return (Bitmap)_imageDictionary[key].Clone();

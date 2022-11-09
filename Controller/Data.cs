@@ -50,12 +50,14 @@ namespace Controller
         /// </summary>
         public static void AddParticipants()
         {
-            Competition.Participants.Add(new Driver("Yoshi", 0, IParticipant.TeamColors.Green));
             Competition.Participants.Add(new Driver("Mario", 0, IParticipant.TeamColors.Red));
-            Competition.Participants.Add(new Driver("Donkey Kong", 0, IParticipant.TeamColors.Orange));
-            Competition.Participants.Add(new Driver("Waluigi", 0, IParticipant.TeamColors.Blue));
-            Competition.Participants.Add(new Driver("Bowser", 0, IParticipant.TeamColors.Grey));
-            Competition.Participants.Add(new Driver("Toad", 0, IParticipant.TeamColors.Yellow));
+            Competition.Participants.Add(new Driver("Toad", 0, IParticipant.TeamColors.White));
+            Competition.Participants.Add(new Driver("Luigi", 0, IParticipant.TeamColors.Green));
+            Competition.Participants.Add(new Driver("DryBones", 0, IParticipant.TeamColors.Blue));
+            Competition.Participants.Add(new Driver("Peach", 0, IParticipant.TeamColors.Pink));
+            Competition.Participants.Add(new Driver("DonkeyKong", 0, IParticipant.TeamColors.Brown));
+            Competition.Participants.Add(new Driver("Yoshi", 0, IParticipant.TeamColors.DarkGreen));
+            Competition.Participants.Add(new Driver("Bowser", 0, IParticipant.TeamColors.Orange));
         }
 
         /// <summary>
@@ -90,10 +92,16 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
                 Section.SectionTypes.LeftCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
@@ -122,10 +130,18 @@ namespace Controller
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
                 Section.SectionTypes.LeftCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.LeftCorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
                 Section.SectionTypes.RightCorner,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,

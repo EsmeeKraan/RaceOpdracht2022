@@ -11,7 +11,14 @@
     </Window.DataContext>
     <StackPanel>
         <Label Content="{Binding CompetitionName}"/>
-        <ListView ItemsSource="{Binding CompetitionPoints}"/>
+        <StackPanel Orientation="Horizontal">
+
+            <ListView ItemsSource="{Binding CompetitionPoints}"/>
+            <ListView ItemsSource="{Binding CompetitionTrackList}"/>
+            <ListView ItemsSource="{Binding CompetitionCompetitors}"/>
+
+        </StackPanel>
 
     </StackPanel>
+
 </Window>

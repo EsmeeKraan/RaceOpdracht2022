@@ -15,11 +15,13 @@
         public enum TeamColors
         {
             Red,
+            White,
             Green,
             Blue,
-            Yellow,
-            Grey,
-            Orange
+            Pink,
+            Brown,
+            DarkGreen,
+            Orange,
         }
         #endregion
 

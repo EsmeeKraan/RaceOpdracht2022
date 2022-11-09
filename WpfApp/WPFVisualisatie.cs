@@ -38,50 +38,30 @@ namespace WpfApp
         private const string _carOrange = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
         private const string _carOrangeBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
 
-        private const string _carYellow = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
-        private const string _carYellowBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
+        private const string _carBrown = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BROWN.png";
+        private const string _carBrownBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BROWN_BROKEN.png";
 
         private const string _carRed = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
         private const string _carRedBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
 
-        private const string _carGrey = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
-        private const string _carGreyBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
+        private const string _carWhite = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_WHITE.png";
+        private const string _carWhiteBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_WHITE_BROKEN.png";
 
         private const string _carGreen = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
         private const string _carGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";
+
+        private const string _carDarkGreen = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_DARKGREEN.png";
+        private const string _carDarkGreenBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_DARKGREEN_BROKEN.png";
+
+        private const string _carPink = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_PINK.png";
+        private const string _carPinkBroken = "C:\\Users\\MSI\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_PINK_BROKEN.png";
         #endregion
 
-        #region LaptopGraphics
-        /*        private const string _startHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\startGridHorizontal.png";
-                private const string _finishHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\finishHorizontal.png";
-
-                private const string _straightHorizontal = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\straightHorizontal.png";
-                private const string _leftUp = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\leftUp.png";
-                private const string _rightDown = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\rightDown.png";
-
-                private const string _carBlue = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE.png";
-                private const string _carBlueBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_BLUE_BROKEN.png";
-
-                private const string _carOrange = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE.png";
-                private const string _carOrangeBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_ORANGE_BROKEN.png";
-
-                private const string _carYellow = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW.png";
-                private const string _carYellowBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_YELLOW_BROKEN.png";
-
-                private const string _carRed = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED.png";
-                private const string _carRedBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_RED_BROKEN.png";
-
-                private const string _carGrey = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY.png";
-                private const string _carGreyBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GRAY_BROKEN.png";
-
-                private const string _carGreen = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN.png";
-                private const string _carGreenBroken = "C:\\Users\\esmee\\source\\repos\\RaceOpdracht2022\\WpfApp\\TypeSection\\teamcolor_GREEN_BROKEN.png";*/
-        #endregion
-        private const float _factor = 0.2f;
+        private const float _factor = 0.30f;
         private static Direction _direction { get; set; }
         public static BitmapSource DrawTrack(Track track)
         {
-            Bitmap emptyImage = createImage.CreateBitmap(1920, 1500, track);
+            Bitmap emptyImage = createImage.CreateBitmap(1800, 1750, track);
             Bitmap trackImage = PlaceSections(track, emptyImage, true);
             return createImage.CreateBitmapSourceFromGdiBitmap(trackImage);
         }
@@ -97,7 +77,7 @@ namespace WpfApp
         {
 
             float x = 32;
-            float y = bitmap.Height * 0.2f;
+            float y = bitmap.Height * 0.10f;
 
             Graphics graphics = Graphics.FromImage(bitmap);
             foreach (Section section in t.Sections)
@@ -251,17 +231,21 @@ namespace WpfApp
             switch (driver.TeamColor)
             {
                 case TeamColors.Blue:
-                    if (driver.Equipment.IsBroken == false) { return _carGreen; } else { return _carGreenBroken; }
+                    if (driver.Equipment.IsBroken == false) { return _carBlue; } else { return _carBlueBroken; }
                 case TeamColors.Red:
                     if (driver.Equipment.IsBroken == false) { return _carRed; } else { return _carRedBroken; }
-                case TeamColors.Yellow:
-                    if (driver.Equipment.IsBroken == false) { return _carOrange; } else { return _carOrangeBroken; }
-                case TeamColors.Grey:
-                    if (driver.Equipment.IsBroken == false) { return _carBlue; } else { return _carBlueBroken; }
+                case TeamColors.White:
+                    if (driver.Equipment.IsBroken == false) { return _carWhite; } else { return _carWhiteBroken; }
+                case TeamColors.DarkGreen:
+                    if (driver.Equipment.IsBroken == false) { return _carDarkGreen; } else { return _carDarkGreenBroken; }
                 case TeamColors.Green:
-                    if (driver.Equipment.IsBroken == false) { return _carGrey; } else { return _carGreyBroken; }
+                    if (driver.Equipment.IsBroken == false) { return _carGreen; } else { return _carGreenBroken; }
+                case TeamColors.Brown:
+                    if (driver.Equipment.IsBroken == false) { return _carBrown; } else { return _carBrownBroken; }
+                case TeamColors.Pink:
+                    if (driver.Equipment.IsBroken == false) { return _carPink; } else { return _carPinkBroken; }
                 case TeamColors.Orange:
-                    if (driver.Equipment.IsBroken == false) { return _carYellow; } else { return _carYellowBroken; }
+                    if (driver.Equipment.IsBroken == false) { return _carOrange; } else { return _carOrangeBroken; }
                 default:
                     return "";
             }
@@ -280,17 +264,17 @@ namespace WpfApp
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    x = x + 10 * _factor;
+                    x = x + 80 * _factor;
                 }
-                else x = x + 80 * _factor;
+                else x = x + 150 * _factor;
             }
             if (side.Equals("right"))
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    //x stays x
+                    //x stays the same
                 }
-                else x = x + 10 * _factor;
+                else x = x + 40 * _factor;
             }
             return x;
         }
@@ -315,9 +299,9 @@ namespace WpfApp
             {
                 if (direction == Direction.East || direction == Direction.West)
                 {
-                    y = y + 60 * _factor;
+                    y = y + 140 * _factor;
                 }
-                else y = y + 20 * _factor;
+                else y = y + 100 * _factor;
             }
             return y;
         }

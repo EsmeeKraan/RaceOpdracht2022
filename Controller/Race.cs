@@ -18,7 +18,7 @@ namespace Controller
         public bool IsOver { get; private set; }
 
         private readonly System.Timers.Timer _timer;
-        private const int _timerInterval = 20;
+        private const int _timerInterval = 35;
         private DateTime _lastSeenBroken = DateTime.Now;
 
         private const int _laps = 3;
@@ -27,6 +27,8 @@ namespace Controller
         public Dictionary<IParticipant, DateTime> ParticipantLapTime = new();
 
         private List<IParticipant> _finishOrder = new();
+
+        private List<IParticipant> _winnerCompeition = new();
 
         private object _positionsLock = new object();
 
@@ -331,7 +333,7 @@ namespace Controller
         {
             foreach (var participant in Participants)
             {
-                participant.Equipment = new Car(_random.Next(60, 100), _random.Next(6, 50), _random.Next(6, 16));
+                participant.Equipment = new Car(_random.Next(60, 100), _random.Next(25, 50), _random.Next(9, 16));
             }
         }
 
@@ -420,7 +422,6 @@ namespace Controller
                     RaceFinished?.Invoke(this, new EventArgs());
                 }
             }
-
         }
         #endregion
     }

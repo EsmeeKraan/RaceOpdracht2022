@@ -1,6 +1,7 @@
 ﻿using Controller;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -14,8 +15,13 @@ namespace WpfApp
         public string CompetitionName { get; set; }
         protected DataContextDispatcher? _dispatcher;
         public ObservableCollection<string> CompetitionPoints { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> CompetitionCompetitors { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> CompetitionTrackList { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ParticipantLapTime { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ParticipantTeamColor { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ParticipantSpeed { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ParticipantPerformance { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> CompetitionWinner { get; set; } = new ObservableCollection<string>();
         public MainWindowDataContext()
         {
             Data.NextRaceEvent += Data_NextRaceEvent;
@@ -49,7 +55,7 @@ namespace WpfApp
             {
                 TrackName = Data.CurrentRace?.Track.Name ?? "";
                 CompetitionName = Data.Competition.Name;
-                CompetitionPointsGiving();
+                AddInfoToScreens();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
             }));
         }
@@ -63,7 +69,7 @@ namespace WpfApp
 
             _dispatcher((Action)(() =>
             {
-                CompetitionPointsGiving();
+                AddInfoToScreens();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
             }));
         }
@@ -85,7 +91,7 @@ namespace WpfApp
         private void LapsChanged()
         {
             ParticipantLapTime.Clear();
-            ParticipantLapTime.Add("Participant laptime");
+            ParticipantLapTime.Add("Participant Total Laptime");
             foreach (IParticipant participant in Data.Competition.Participants)
             {
                 string lapTime = "";
@@ -97,17 +103,37 @@ namespace WpfApp
             }
         }
 
-        private void CompetitionPointsGiving()
+        private void AddInfoToScreens()
         {
+            CompetitionCompetitors.Clear();
+            CompetitionTrackList.Clear();
+            ParticipantPerformance.Clear();
             CompetitionPoints.Clear();
             ParticipantSpeed.Clear();
+            ParticipantTeamColor.Clear();
+            CompetitionTrackList.Add("Upcoming Tracks!");
+            ParticipantTeamColor.Add("Participant Color");
             CompetitionPoints.Add("Participant Points");
             ParticipantSpeed.Add("Participant Speed");
+            ParticipantPerformance.Add("Participant Car Performance");
+            CompetitionCompetitors.Add("Competitors Competing in Competition");
             foreach (IParticipant participant in Data.Competition.Participants)
             {
                 ParticipantSpeed.Add(participant.Name + " " + participant.Equipment.Speed);
-                CompetitionPoints.Add(participant.Name + " " + participant.Points);
+                ParticipantPerformance.Add($"{participant.Name} {participant.Equipment.Performance}");
+;               CompetitionPoints.Add(participant.Name + " " + participant.Points);
+                ParticipantTeamColor.Add($"{participant.Name}: {participant.TeamColor}");
+                CompetitionCompetitors.Add($"{participant.Name}");
             }
+
+
+            foreach(Track track in Data.Competition.Tracks)
+            {
+                CompetitionTrackList.Add(track.Name);
+            }
+            
         }
+
+        
     }
 }

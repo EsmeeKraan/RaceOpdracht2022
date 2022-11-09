@@ -27,10 +27,10 @@ namespace RaceOpdrachtHuiswerk
                                                       "═════" };
 
 
-        private static string[] _startHorizontal = { "═════",
-                                                     "  L  ",
-                                                     "  R  ",
-                                                     "═════" };
+        private static string[] _startHorizontal = { "══════",
+                                                     "   L  ",
+                                                     "   R  ",
+                                                     "══════" };
 
 
         private static string[] _finishVertical = { "║ #  # ║", };
